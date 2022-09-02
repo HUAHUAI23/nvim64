@@ -25,7 +25,7 @@ nvim.tar包的目录结构如下
 
 nvim-linux64.tar是neovim官方的portable版  https://github.com/neovim/neovim/releases/tag/v0.7.2
 
-将nvim.tar包下载下来后执行如下命令
+将[nvim.tar](https://github.com/HUAHUAI23/nvim64/releases/download/v1.0/nvim.tar)包下载下来后执行如下命令
 
 ```shell
 tar -xf nvim.tar

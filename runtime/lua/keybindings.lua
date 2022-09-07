@@ -21,8 +21,8 @@ map("i", "<F1>", "", opt)
 
 -- insert模式下键盘映射
 local inser = keybindingAlias.insert
-map("i", inser.goto_command_mode, "<Esc>:", opt)
-map("i", inser.goto_normal_mode, "<Esc>", opt)
+map("i", inser.goto_command_mode, "<Esc>:", { noremap = true, silent = false })
+map("i", inser.goto_normal_mode, "<Esc>", { noremap = true, silent = false })
 
 --- normal模式下键盘映射
 
@@ -33,12 +33,14 @@ map("n", "H", "", opt)
 map("n", "L", "", opt)
 -- 取消normal模式下 f1键的默认功能
 map("n", "<F1>", "", opt)
+-- 取消normal模式下 qq键的默认功能(连续点击两下q键)
+map("n", "qq", "", opt)
 
 -- magic search
 -- map("n", "/", "/\\v", { noremap = true, silent = false })
 
 local norl = keybindingAlias.norl
-map("n", norl.goto_command_mode, ":", opt)
+map("n", norl.goto_command_mode, ":", { noremap = true, silent = false })
 
 map("n", norl.go_left35, "35h", opt)
 map("n", norl.go_right35, "35l", opt)
@@ -59,6 +61,8 @@ map("n", norl.go_down_10line, "10j", opt)
 map("n", norl.go_down_5line, "5j", opt)
 map("n", norl.go_up_5line, "5k", opt)
 
+-- 定义快捷键关闭当前buffer
+map("n", norl.quit_buffer, ":bd<CR>", opt)
 -- 定义快捷键关闭当前分割窗口
 map("n", norl.quit_window, ":q<CR>", opt)
 -- 定义快捷键保存当前窗口内容
@@ -141,8 +145,9 @@ pluginKeys.comment = {
 	},
 }
 -- ctrl + /
-map("n", "<C-_>", "gcc", { noremap = false })
-map("v", "<C-_>", "gcc", { noremap = false })
+map("n", "<C-_>", "gccA", { noremap = false })
+map("v", "<C-_>", "gc", { noremap = false })
+map("i", "<C-_>", "<Esc>gccA", { noremap = false })
 
 --- telescope
 local telesp = keybindingAlias.telescope
@@ -297,6 +302,61 @@ pluginKeys.mapToggleTerm = function(toggleterm)
 	vim.keymap.set({ "n", "t" }, toggletermm.toggleA, toggleterm.toggleA)
 	vim.keymap.set({ "n", "t" }, toggletermm.toggleB, toggleterm.toggleB)
 	vim.keymap.set({ "n", "t" }, toggletermm.toggleC, toggleterm.toggleC)
+	vim.keymap.set({ "n", "t" }, toggletermm.toggleG, toggleterm.toggleG)
+end
+
+-- gitsigns
+pluginKeys.gitsigns_on_attach = function(bufnr)
+	local gitsignss = require("keybindingAlias").gitsigns
+	local gs = package.loaded.gitsigns
+
+	local function map(mode, l, r, opts)
+		opts = opts or {}
+		opts.buffer = bufnr
+		vim.keymap.set(mode, l, r, opts)
+	end
+
+	-- Navigation
+	map("n", gitsignss.gs_next_hunk, function()
+		if vim.wo.diff then
+			return "<leader>gj"
+		end
+		vim.schedule(function()
+			gs.next_hunk()
+		end)
+		return "<Ignore>"
+	end, { expr = true })
+
+	map("n", gitsignss.gs_pre_hunk, function()
+		if vim.wo.diff then
+			return "<leader>gk"
+		end
+		vim.schedule(function()
+			gs.prev_hunk()
+		end)
+		return "<Ignore>"
+	end, { expr = true })
+
+	-- Actions
+	map({ "n", "v" }, gitsignss.stage_hunk, ":Gitsigns stage_hunk<CR>")
+	map({ "n", "v" }, gitsignss.reset_hunk, ":Gitsigns reset_hunk<CR>")
+	map("n", gitsignss.stage_buffer, gs.stage_buffer)
+	map("n", gitsignss.undo_stage_hunk, gs.undo_stage_hunk)
+	map("n", gitsignss.reset_buffer, gs.reset_buffer)
+	map("n", gitsignss.preview_hunk, gs.preview_hunk)
+	map("n", gitsignss.blame_line, function()
+		gs.blame_line({ full = true })
+	end)
+	map("n", gitsignss.diffthis, gs.diffthis)
+	map("n", gitsignss.diffthiss, function()
+		gs.diffthis("~")
+	end)
+	-- toggle
+	map("n", gitsignss.toggle_current_line_blame, gs.toggle_current_line_blame)
+	map("n", gitsignss.toggle_deleted, gs.toggle_deleted)
+
+	-- Text object
+	map({ "o", "x" }, gitsignss.select_hunk, ":<C-U>Gitsigns select_hunk<CR>")
 end
 
 return pluginKeys

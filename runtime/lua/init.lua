@@ -97,6 +97,34 @@ local function load_plugins()
 			-- neocroll.nvim
 			use("karb94/neoscroll.nvim")
 
+			-- --------git-------------------
+			use({
+				"lewis6991/gitsigns.nvim",
+				-- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+				config = function()
+					require("plugin-config.gitsigns")
+				end,
+			})
+			-- --------markdown--------------
+			-- install without yarn or npm
+			-- markdown preview
+			use({
+				"iamcco/markdown-preview.nvim",
+				run = function()
+					vim.fn["mkdp#util#install"]()
+				end,
+				config = function()
+					require("plugin-config.markdown-preview")
+				end,
+			})
+			-- markdown work flow
+			use({
+				"jakewvincent/mkdnflow.nvim",
+				rocks = "luautf8",
+				config = function()
+					require("plugin-config.mkdnflow")
+				end,
+			})
 			-- --------telescope-------------
 			use({
 				"nvim-telescope/telescope.nvim",

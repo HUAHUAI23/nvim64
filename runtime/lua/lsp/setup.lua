@@ -45,6 +45,8 @@ mason_lspconfig.setup({
 		"fixjson",
 		"emmet-ls",
 		"css-lsp",
+		"markdownlint",
+		"gopls",
 	},
 	automatic_installation = true,
 })
@@ -111,13 +113,14 @@ local servers = {
 	pyright = require("lsp.config.pyright"),
 	-- eslint = require("lsp.config.eslint"),
 	tsserver = require("lsp.config.tsserver"),
-	-- sqls = require("lsp.config.sqls"),
+	sqls = require("lsp.config.sqls"),
 	emmet_ls = require("lsp.config.emmet-ls"),
 	jsonls = require("lsp.config.json"),
 	html = require("lsp.config.html"),
 	cssls = require("lsp.config.css"),
 	clangd = require("lsp.config.clangd"),
 	-- quick_lint_js = require("lsp.config.quick-lint-js"),
+	gopls = require("lsp.config.gopls"),
 }
 for name, config in pairs(servers) do
 	if config ~= nil and type(config) == "table" then

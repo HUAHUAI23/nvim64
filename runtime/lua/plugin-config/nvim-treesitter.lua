@@ -4,6 +4,8 @@ if not status then
 	return
 end
 
+local lsp = require("keybindingAlias").lsp
+
 treesitter.setup({
 	-- 安装 language parser
 	-- :TSInstallInfo 命令查看支持的语言
@@ -42,6 +44,12 @@ treesitter.setup({
 			clear_on_cursor_move = true,
 		},
 		highlight_current_scope = { enable = true },
+		smart_rename = {
+			enable = true,
+			keymaps = {
+				smart_rename = lsp.tsRename,
+			},
+		},
 	},
 
 	-- https://github.com/windwp/nvim-ts-autotag

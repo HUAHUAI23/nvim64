@@ -86,6 +86,8 @@ local M = {
 		NvimTreeToggle = "<space>f",
 	},
 	lsp = {
+		--treesitter rename
+		tsRename = "ra",
 		rename = "rn",
 		code_action = "ca",
 		definition = "gd",
@@ -156,6 +158,7 @@ local M = {
 		enable = true,
 		mkdnDestroyLink = "md",
 		mkdnTagSpan = "md",
+		mkdnTablePrevRow = "md",
 		mkdnToggleToDo = "mt",
 		mkdnFoldSection = "mz",
 		mkdnUnfoldSection = "<leader>mz",

@@ -2,12 +2,12 @@ local mkd = require("keybindingAlias").mkdnflow
 if type(mkd) == "table" and mkd.enable then
 	require("mkdnflow").setup({
 		mappings = {
-			MkdnDestroyLink = { "n", "md" },
-			MkdnTagSpan = { "v", "md" },
-			MkdnToggleToDo = { { "n", "v" }, "mt" },
-			MkdnTablePrevRow = { "i", "md" },
-			MkdnFoldSection = { "n", "mz" },
-			MkdnUnfoldSection = { "n", ";mz" },
+			MkdnDestroyLink = { "n", mkd.mkdnDestroyLink },
+			MkdnTagSpan = { "v", mkd.mkdnTagSpan },
+			MkdnToggleToDo = { { "n", "v" }, mkd.mkdnToggleToDo },
+			MkdnTablePrevRow = { "i", mkd.mkdnTablePrevRow },
+			MkdnFoldSection = { "n", mkd.mkdnFoldSection },
+			MkdnUnfoldSection = { "n", mkd.mkdnUnfoldSection },
 		},
 	})
 

@@ -145,9 +145,9 @@ pluginKeys.comment = {
 	},
 }
 -- ctrl + /
-map("n", "<C-_>", "gccA", { noremap = false })
+map("n", "<C-_>", "gccA<Space>", { noremap = false })
 map("v", "<C-_>", "gc", { noremap = false })
-map("i", "<C-_>", "<Esc>gccA", { noremap = false })
+map("i", "<C-_>", "<Esc>gccA<Space>", { noremap = false })
 
 --- telescope
 local telesp = keybindingAlias.telescope

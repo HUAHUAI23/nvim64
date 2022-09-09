@@ -1,11 +1,12 @@
 # neovim IDE基本使用说明
+
 ---
 
 ## 安装须知
 
 ### 需要准备的东西
 
-- 请确保系统有`git`，`tar`，`curl`，`wget`，和基本的编译环境例如 `gcc`和`libstdc++` 库，ubuntu可以通过`sudo apt install git tar curl wget build-essential` 安装上面所需软件。
+- 请确保系统有`git`，`tar`，`curl`，`wget`，和基本的编译环境例如 `gcc`和`libstdc++` 库（treesitter插件需要这些编译环境），ubuntu可以通过`sudo apt install git tar curl wget build-essential` 安装上面所需软件。
 
 - 网络环境可以流畅的访问github
 
@@ -22,7 +23,7 @@ nvim.tar包的目录结构如下
 └── share
 ```
 
-nvim-linux64.tar是neovim官方的portable版  https://github.com/neovim/neovim/releases/tag/v0.7.2
+nvim-linux64.tar是neovim官方的portable版  <https://github.com/neovim/neovim/releases/tag/v0.7.2>
 
 将[nvim.tar](https://github.com/HUAHUAI23/nvim64/releases/download/v1.0/nvim.tar)包下载下来后执行如下命令
 
@@ -41,7 +42,7 @@ source int42.sh
 
 Mason安装上述**LSP** **DAP** **Linter** **Formatter** 可能需要安装**nodejs**，**python** **venv**，**golang**环境。
 
-ubuntu下nodejs安装参考 **nvm**: https://github.com/nvm-sh/nvm
+ubuntu下nodejs安装参考 **nvm**: <https://github.com/nvm-sh/nvm>
 
 golang: `sudo apt install golang`
 
@@ -150,7 +151,7 @@ python venv: `sudo apt install python3 python3-venv`
   +----------------------+-------------------------+
   ```
 
-  `:split ` 沿着水平方向打开一个新的window，`:vsplit` 沿着垂直方向打开一个新的window。
+  `:split` 沿着水平方向打开一个新的window，`:vsplit` 沿着垂直方向打开一个新的window。
 
   `:split <filename|path/to/file>` 打开一个新的文件
 
@@ -273,11 +274,13 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
      `ctrl-j` `ctrl-k` 向上向下移动多行光标
 
-     `<Leader>q` 关闭当前window，`<Leader>w` 保存当前window的buffer（将当前window的内容保存），`<Leader>WQ` 关闭所有window，`<Leader>Q` 退出neovim并且不保存buffer
+     `qq` 关闭当前buffer `<Leader>q` 关闭当前window，`<Leader>w` 保存当前window的buffer（将当前window的内容保存），`<Leader>WQ` 关闭所有window，`<Leader>Q` 退出neovim并且不保存buffer
 
      `sh` , `sv` 新建水平window，新建垂直window，`s←` ，`s→`，`s↑` ，`s↓` 上下左右切换window，`sw` 按顺时针方向依次切换window
 
      `sk` ，`sj` ，`s,` ，`s.` 将window向上移动2点，将window向下移动2点，将window向左移动2点，将window向右移动2点，`s=` 将window恢复默认大小
+
+     `<ctrl-/>` 行注释
 
    - insert模式下键位映射
 
@@ -286,6 +289,8 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
      `<F1>` 进入command模式
 
      `<Leader><Leader>` 进入normal模式
+
+     `<ctrl-/>` 行注释
 
    - visual模式下键位映射
 
@@ -346,15 +351,15 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 1. LSP
 
    LSP相关详细内容参考 `:h lsp`
-   LSP: https://github.com/neovim/nvim-lspconfig
-   null-ls: https://github.com/jose-elias-alvarez/null-ls.nvim
-   mason: https://github.com/williamboman/mason.nvim
+   LSP: <https://github.com/neovim/nvim-lspconfig>
+   null-ls: <https://github.com/jose-elias-alvarez/null-ls.nvim>
+   mason: <https://github.com/williamboman/mason.nvim>
 
    `:LspInfo` `:LspLog` `:NullLsInfo` `:NullLsLog` 可以查看LSP client相关情况。
 
 2. bufferline
 
-   bufferline：https://github.com/akinsho/bufferline.nvim
+   bufferline：<https://github.com/akinsho/bufferline.nvim>
 
    `:BufferLinePick` 切换至选中的buffer
 
@@ -366,7 +371,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 3. lspsaga
 
-   lspsage: https://github.com/glepnir/lspsaga.nvim
+   lspsage: <https://github.com/glepnir/lspsaga.nvim>
 
    `:LSoutlineToggle` 打开outline
 
@@ -380,7 +385,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 4. nvim-tree
 
-   nvimTree: https://github.com/kyazdani42/nvim-tree.lua
+   nvimTree: <https://github.com/kyazdani42/nvim-tree.lua>
 
    `:NvimTreeToggle` 打开|关闭nvimTree窗口，
 
@@ -418,7 +423,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 5. treesitter
 
-   treesitter: https://github.com/nvim-treesitter/nvim-treesitter
+   treesitter: <https://github.com/nvim-treesitter/nvim-treesitter>
 
    一些常用treesitter命令
 
@@ -432,7 +437,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 6. telescope
 
-   telescope: https://github.com/nvim-telescope/telescope.nvim
+   telescope: <https://github.com/nvim-telescope/telescope.nvim>
 
    telescope 窗口的默认键位映射
 
@@ -470,7 +475,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 7. project
 
-   project: https://github.com/ahmedkhalf/project.nvim
+   project: <https://github.com/ahmedkhalf/project.nvim>
 
    `:Telescope project` 打开项目窗口
 
@@ -493,7 +498,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 8. comment todo
 
-   commentTodo: https://github.com/folke/todo-comments.nvim
+   commentTodo: <https://github.com/folke/todo-comments.nvim>
 
    类似vscode的todotree
 
@@ -512,7 +517,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 9. trouble
 
-   trouble: https://github.com/folke/trouble.nvim
+   trouble: <https://github.com/folke/trouble.nvim>
 
    Trouble comes with the following commands:
 
@@ -549,7 +554,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 10. toggleterm
 
-    toggleterm: https://github.com/akinsho/toggleterm.nvim
+    toggleterm: <https://github.com/akinsho/toggleterm.nvim>
 
     ```textile
     常用的toggleterm命令
@@ -564,6 +569,10 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 11. cmp
 
-    cmp: https://github.com/hrsh7th/nvim-cmp
+    cmp: <https://github.com/hrsh7th/nvim-cmp>
 
     `:CmpStatus` 查看cmp加载状态
+
+12. gitsigns
+
+    ffff

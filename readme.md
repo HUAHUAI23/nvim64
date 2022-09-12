@@ -14,7 +14,7 @@
 
 nvim.tar包的目录结构如下
 
-```textile
+```plain
 ├── initial.sh
 ├── int42.sh
 ├── nvim-linux64.tar
@@ -25,9 +25,9 @@ nvim.tar包的目录结构如下
 
 nvim-linux64.tar是neovim官方的portable版  <https://github.com/neovim/neovim/releases/tag/v0.7.2>
 
-将[nvim.tar](https://github.com/HUAHUAI23/nvim64/releases/download/v1.0/nvim.tar)包下载下来后执行如下命令
+将nvim.tar包 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.tar> 下载下来后执行如下命令
 
-```shell
+```plain
 tar -xf nvim.tar
 cd nvim64
 bash initial.sh
@@ -38,7 +38,22 @@ cd nvim-linux64/bin/
 source int42.sh
 ```
 
-第一次进入neovim后，neovim会自动下载插件,下载完插件后可以退出待第二次继续进入neovim，第二次进入neovim时请执行`:TSupdate` 更新treesitter和执行`:PackSync` 更新插件，为保证LSP正常工作，须执行`:Mason` 然后将这些全部安装`"bash-language-server", "shfmt", "shellcheck", "stylua", "lua-language-server", "black", "pyright", "pylint", "debugpy", "clang-format", "clangd", "cpptools", "eslint-lsp", "eslint_d", "node-debug2-adapter", "typescript-language-server", "quick-lint-js", "prettier", "sqls", "sql-formatter", "json-lsp", "html-lsp", "fixjson", "emmet-ls", "css-lsp"`
+或者下载打包好的版本 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.packaged.tar.gz>，打包好的版本已经将插件和LSP相关的东西打包进去了，所以**不需要执行下面`:TSupdate` `:PackSync` `:MasonInstall` 等操作**，但是依然要保证系统有python venv和nodejs环境。
+
+```plain
+# 打包版本的使用
+
+tax -xf nvim64.packaged.tar.gz
+cd nvim64/nvim-linux64/bin
+source int42
+n
+# 也可以直接 nvim64/nvim-linux64/bin/nvim
+
+```
+
+lite版本参考: <https://github.com/HUAHUAI23/nvim64lite>
+
+第一次进入neovim后，neovim会自动下载插件,下载完插件后可以退出待第二次继续进入neovim，第二次进入neovim时请执行`:TSupdate` 更新treesitter和执行`:PackSync` 更新插件，为保证LSP正常工作，须执行`:Mason` 然后将这些全部安装`"bash-language-server", "shfmt", "shellcheck", "stylua", "lua-language-server", "black", "pyright", "pylint", "debugpy", "clang-format", "clangd", "cpptools", "eslint-lsp", "eslint_d", "node-debug2-adapter", "typescript-language-server", "quick-lint-js", "prettier", "sqls", "sql-formatter", "json-lsp", "html-lsp", "fixjson", "emmet-ls", "css-lsp", "gopls"`
 
 在第二次进入neovim后 输入`MasonInstall bash-language-server shfmt shellcheck stylua lua-language-server black pyright pylint debugpy clang-format clangd cpptools eslint-lsp eslint_d node-debug2-adapter typescript-language-server quick-lint-js prettier sqls sql-formatter json-lsp html-lsp fixjson emmet-ls css-lsp markdownlint gopls`
 
@@ -139,7 +154,7 @@ python venv: `sudo apt install python3 python3-venv`
 
   在vim中有着window tab buffer概念，buffer即缓存区，它存储着内容，比如当前编辑的文件，这涉及到Linux的一个概念**流**，在Linux中一切都是文件都是数据，你当前编辑的文件就是一个数据流，该数据流暂存在内存的一块地址中（buffer），最后发生一次io写入到硬盘中，在Linux中硬盘也是一个文件，可以通过`ls /dev/` 查看。buffer中的数据通过window展示，即在vim中打开一个窗口展示buffer中的数据，tab则为布局方式，组织排列窗口的布局。
 
-  ```textile
+  ```plain
                       vim
   tab
   +----------------------+-------------------------+
@@ -187,18 +202,13 @@ python venv: `sudo apt install python3 python3-venv`
 
 neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文件或init.lua文件，sysinit.vim在neovim启动阶段也会被加载，一般这个文件在目录 `$VIM/sysinit.vim` 下，更详细的说明参考`:h config` 。在neovim启动过程中，sysinit.vim会拉起我的neovim配置，sysinit.vim在目录 `nvim-linux64/share/nvim/` 下，我的配置文件在吗目录 `nvim-linux64/share/nvim/runtime/lua/` 下，下面是目录`nvim-linux64/share/nvim/runtime/lua/` 的目录结构。
 
-```textile
+```plain
+.
 ├── autocmd.lua
 ├── basic.lua
 ├── cmp
 │   └── cmp.lua
 ├── colorscheme.lua
-├── dap
-│   └── nvim-dap
-│   ├── config
-│   │   ├── cpp.lua
-│   │   └── nodejs.lua
-│   └── setup.lua
 ├── init.lua
 ├── keybindingAlias.lua
 ├── keybindings.lua
@@ -206,17 +216,8 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 │   ├── common-config.lua
 │   ├── config
 │   │   ├── bash.lua
-│   │   ├── clangd.lua
-│   │   ├── css.lua
-│   │   ├── emmet-ls.lua
-│   │   ├── eslint.lua
-│   │   ├── html.lua
-│   │   ├── json.lua
-│   │   ├── lua.lua
 │   │   ├── pyright.lua
-│   │   ├── quick-lint-js.lua
-│   │   ├── sqls.lua
-│   │   └── tsserver.lua
+│   │   └── sqls.lua
 │   ├── null-ls.lua
 │   ├── setup.lua
 │   └── ui.lua
@@ -225,6 +226,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 │   ├── comment.lua
 │   ├── dashboard.lua
 │   ├── fidget.lua
+│   ├── gitsigns.lua
 │   ├── indent-blankline.lua
 │   ├── lualine.lua
 │   ├── neoscrolL.lua
@@ -236,6 +238,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 │   ├── todo-comments.lua
 │   ├── toggleterm.lua
 │   ├── trouble.lua
+│   ├── yanky.lua
 │   └── zen-mode.lua
 └── project.md
 ```
@@ -411,7 +414,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
    下面列举nvimTree窗口一些常用的快捷键指令
 
-   ```textile
+   ```plain
    `<CR>`            edit                open a file or folder; root will cd to the above directory
    `I`               toggle_git_ignored  toggle visibility of files/folders hidden via |git.ignore| option
    `H`               toggle_dotfiles     toggle visibility of dotfiles via |filters.dotfiles| option
@@ -526,7 +529,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
    ![](./picture/7.png)
 
-   ```shell
+   ```plain
    常用的todo命令
    :TodoQuickFix
    :TodoLocList
@@ -550,7 +553,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
    trouble窗口默认键位映射
 
-   ```textile
+   ```plain
    close = "q", -- close the list
    cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
    refresh = "r", -- manually refresh
@@ -576,7 +579,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
     toggleterm: <https://github.com/akinsho/toggleterm.nvim>
 
-    ```textile
+    ```plain
     常用的toggleterm命令
     :<count>TermExec
     :<count>ToggleTerm

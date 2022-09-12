@@ -12,7 +12,7 @@
 
 ### 如何安装
 
-nvim.tar包的目录结构如下
+nvim64.tar包的目录结构如下
 
 ```plain
 ├── initial.sh
@@ -25,7 +25,7 @@ nvim.tar包的目录结构如下
 
 nvim-linux64.tar是neovim官方的portable版  <https://github.com/neovim/neovim/releases/tag/v0.7.2>
 
-将nvim.tar包 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.tar> 下载下来后执行如下命令
+将nvim64.tar包 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.tar> 下载下来后执行如下命令
 
 ```plain
 tar -xf nvim.tar

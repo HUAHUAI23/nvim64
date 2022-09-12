@@ -54,11 +54,20 @@ autocmd("BufEnter", {
 	end,
 })
 
+-- if vim.fn.has("wsl") then
+-- 	vim.cmd([[
+--     augroup Yank
+--     autocmd!
+--     autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+--     augroup END
+--     ]])
+-- end
+-- 当在wsl环境下，剪切内容到系统寄存器时会将内容同步复制到win的剪切板中
 if vim.fn.has("wsl") then
 	vim.cmd([[
-    augroup Yank
+    augroup wslYank
     autocmd!
-    autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+    autocmd TextYankPost * if v:event.regname ==# '+' | call system('/mnt/c/windows/system32/clip.exe ',@") | endif
     augroup END
     ]])
 end

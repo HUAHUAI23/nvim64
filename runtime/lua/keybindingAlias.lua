@@ -158,10 +158,14 @@ local M = {
 		enable = true,
 		mkdnDestroyLink = "md",
 		mkdnTagSpan = "md",
-		mkdnTablePrevRow = "md",
+		mkdnTablePrevRow = "<C-CR>",
 		mkdnToggleToDo = "mt",
 		mkdnFoldSection = "mz",
 		mkdnUnfoldSection = "<leader>mz",
+	},
+	yanky = {
+		yanky_after = "p",
+		yanky_before = "P",
 	},
 }
 

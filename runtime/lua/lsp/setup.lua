@@ -20,9 +20,8 @@ end
 mason_lspconfig.setup({
 	ensure_installed = {
 		"bash-language-server",
-		-- "shfmt",
+		"shfmt", 
 		"shellcheck",
-		-- "luacheck",
 		"stylua",
 		"lua-language-server",
 		"black",

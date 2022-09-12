@@ -359,4 +359,9 @@ pluginKeys.gitsigns_on_attach = function(bufnr)
 	map({ "o", "x" }, gitsignss.select_hunk, ":<C-U>Gitsigns select_hunk<CR>")
 end
 
+-- yanky
+local yankyy = require("keybindingAlias").yanky
+vim.keymap.set({ "n", "x" }, yankyy.yanky_after, "<Plug>(YankyPutAfter)")
+vim.keymap.set({ "n", "x" }, yankyy.yanky_before, "<Plug>(YankyPutBefore)")
+
 return pluginKeys

@@ -30,7 +30,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " color deus
 let g:deus_termcolors=256
 
-hi NonText ctermfg=gray guifg=grey10
+hi NonText ctermfg=gray guifg=grey50
 
 hi SignColumn ctermbg=None guibg=None
 hi VertSplit ctermfg=None ctermbg=None cterm=None guibg=None guifg=None

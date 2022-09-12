@@ -6,7 +6,7 @@
 
 ### 需要准备的东西
 
-- 请确保系统有`git`，`tar`，`curl`，`wget`，和基本的编译环境例如 `gcc`和`libstdc++` 库（treesitter插件需要这些编译环境），ubuntu可以通过`sudo apt install git tar curl wget build-essential` 安装上面所需软件。
+- 请确保系统有`git`，`tar`，`curl`，`wget`，`unzip` （如果需要使用lazygit则请确保lazygit的安装） 和基本的编译环境例如 `gcc`和`libstdc++` 库（treesitter插件需要这些编译环境），ubuntu可以通过`sudo apt install git tar curl wget unzip build-essential` 安装上面所需软件。
 
 - 网络环境可以流畅的访问github
 
@@ -40,6 +40,10 @@ source int42.sh
 
 第一次进入neovim后，neovim会自动下载插件,下载完插件后可以退出待第二次继续进入neovim，第二次进入neovim时请执行`:TSupdate` 更新treesitter和执行`:PackSync` 更新插件，为保证LSP正常工作，须执行`:Mason` 然后将这些全部安装`"bash-language-server", "shfmt", "shellcheck", "stylua", "lua-language-server", "black", "pyright", "pylint", "debugpy", "clang-format", "clangd", "cpptools", "eslint-lsp", "eslint_d", "node-debug2-adapter", "typescript-language-server", "quick-lint-js", "prettier", "sqls", "sql-formatter", "json-lsp", "html-lsp", "fixjson", "emmet-ls", "css-lsp"`
 
+在第二次进入neovim后 输入`MasonInstall bash-language-server shfmt shellcheck stylua lua-language-server black pyright pylint debugpy clang-format clangd cpptools eslint-lsp eslint_d node-debug2-adapter typescript-language-server quick-lint-js prettier sqls sql-formatter json-lsp html-lsp fixjson emmet-ls css-lsp markdownlint gopls`
+
+如果没成功可以多执行几次 `:PackSync` 保证Mason插件成功安装，然后再执行 `MasonInstall`
+
 Mason安装上述**LSP** **DAP** **Linter** **Formatter** 可能需要安装**nodejs**，**python** **venv**，**golang**环境。
 
 ubuntu下nodejs安装参考 **nvm**: <https://github.com/nvm-sh/nvm>
@@ -48,13 +52,17 @@ golang: `sudo apt install golang`
 
 python venv: `sudo apt install python3 python3-venv`
 
+**下面gif动图展示第一次安装我的neovim过程**
+
+![安装我的neovim](./picture/1.gif)
+
 ### 我的neovim可以做什么
 
-我的neovim配置了c，python，nodejs，lua，bash，ts，sql的LSP，代码调试功能配置了python和nodejs。
+我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go的LSP，代码调试功能配置了python和nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览。
 
 #### 我的neovim首页
 
-![](./picture/8.png)
+![我的neovim首页](./picture/8.png)
 
 ---
 
@@ -234,9 +242,9 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 **autocmd.lua**为定义的一些vim autocmd比如在yank的时候高亮yank的内容，对指定文件保存时进行格式化处理，**basic.lua**为对neovim一些基本编辑属性的配置，比如定义2个空格等于一个tab，**cmp**目录里的配置文件为neovim写代码时自动补全配置。
 
-****neovim 代码补全**
+**neovim 代码补全**
 
-![](./picture/neovim1.png)
+![neovim 代码补全](./picture/neovim1.png)
 
 **colorscheme.lua**定义了neovim的主题，配色，**dap**目录里的文件为neovim代码调试器相关配置。
 
@@ -268,7 +276,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
      `H` , `L` 光标向左移动35个字符，光标向右移动35个字符
 
-     `sp` , `P` 进入粘贴模式，退出粘贴模式，什么是粘贴模式参考 `:h 'paste'`
+     `sp` , `sP` 进入粘贴模式，退出粘贴模式，什么是粘贴模式参考 `:h 'paste'`
 
      `ctrl-u` `ctrl-d` 向上向下移动多行光标
 
@@ -281,6 +289,8 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
      `sk` ，`sj` ，`s,` ，`s.` 将window向上移动2点，将window向下移动2点，将window向左移动2点，将window向右移动2点，`s=` 将window恢复默认大小
 
      `<ctrl-/>` 行注释
+
+     `za`代码折叠与代码展开，`zr` `zm` 打开/关闭所有折叠，`zd` `zE` 删除当前/删除所有折叠 `zj` `zk` 移动至上一/下一折叠点。
 
    - insert模式下键位映射
 
@@ -295,6 +305,8 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
    - visual模式下键位映射
 
      `ctrl-j` `ctrl-k` 向上向下移动多行光标
+
+     `Y` 将内容复制到系统剪切板(非neovim剪切板)
 
    - command模式下键位映射
 
@@ -344,7 +356,15 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
    - toggerterm
 
-     `<Leader>ta` 打开|关闭 终端，`<Leader>tb` 打开|关闭 终端，`<Leader>tc` 打开|关闭 终端。
+     `<Leader>ta` 打开|关闭 终端，`<Leader>tb` 打开|关闭 终端，`<Leader>tc` 打开|关闭 终端 `<Leader>td` 打开关闭特色终端[lazygit](https://github.com/jesseduffield/lazygit) 需要安装**lazygit**
+
+   - gitsigns
+
+     详细见插件介绍
+
+   - mkdnflow.nvim
+
+     详细见插件介绍
 
 ### 2.3 插件介绍
 
@@ -573,6 +593,111 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
     `:CmpStatus` 查看cmp加载状态
 
-12. gitsigns
+12. yanky
 
-    ffff
+    yanky: <https://github.com/gbprod/yanky.nvim>
+
+    常用的yanky插件命令
+
+    `:Telescope yank_history` 打开neovim剪切板历史
+
+    ![Telescope yank_history](./picture/9.png)
+
+    `:Telescope yank_history` 打开的面板中，insert模式（i）和normal模式（n）下的keymap如下所示
+
+    ```plain
+    mappings = {
+      default = mapping.put("p"),
+      i = {
+        ["<c-p>"] = mapping.put("p"),
+        ["<c-k>"] = mapping.put("P"),
+        ["<c-x>"] = mapping.delete(),
+        ["<c-r>"] = mapping.set_register(utils.get_default_register()),
+      },
+      n = {
+        p = mapping.put("p"),
+        P = mapping.put("P"),
+        d = mapping.delete(),
+        r = mapping.set_register(utils.get_default_register())
+      },
+    ```
+
+    `p` `P` 粘贴剪切板内容到文本
+
+13. gitsigns
+
+    gitsigns: <https://github.com/lewis6991/gitsigns.nvim>
+
+    常用命令
+
+    - `:Gitsigns toggle_current_line_blame` 展示或者不展示current line blame
+    - `:Gitsigns seqloclist` 展示hunk列表
+    - `:Gitsigns setqflist` 展示hunk列表
+      ![Gitsigns setqflist](./picture/11.png)
+
+    键位映射
+
+     ```plain
+     gitsigns = {
+      gs_next_hunk = "<leader>gj",
+      gs_pre_hunk = "<leader>gk",
+      stage_hunk = "<leader>gs",
+      reset_hunk = "<leader>gr",
+      stage_buffer = "<leader>gS",
+      undo_stage_hunk = "<leader>gu",
+      reset_buffer = "<leader>gR",
+      preview_hunk = "<leader>gp",
+      blame_line = "<leader>gb",
+      diffthis = "<leader>gd",
+      diffthiss = "<leader>gD",
+      toggle_current_line_blame = "<leader>gtb",
+      toggle_deleted = "<leader>gtd",
+      select_hunk = "ig",
+     },
+     ```
+
+     常用的键位有`<leader>gj` `<leader>gk` 上下跳转hunk `<leader>gp` `<leadeer>gd` 预览hunk 和show diff。
+
+14. mkdnflow
+
+    markdown: <https://github.com/jakewvincent/mkdnflow.nvim>
+
+    **visual模式下一些便捷操作**
+
+    `<CR>` 当文本以 #开头将创建anchor link（锚点链接） 当文本是uri时将创建 web link
+
+    **normal模式下一些便捷操作**
+
+    `<CR>` 创建链接 `md` 删除链接 `ya` `yfa` 给一个标题创建anchor link `<TAB>` `<S-TAB>` 上下跳转链接 `[[` `]]` 上下跳转标题 `+` `-` 增加标题层级
+
+    下面gif动图展示上述便捷操作unordered list
+
+    ![一些markdown便捷操作](./picture/2.gif)
+
+    `:MkdnTable x y` 创建x 行y 列的表 `:MkdnTableFormat` 格式化table
+
+    **一些键位映射**
+
+    ```plain
+     mkdnflow = {
+       enable = true,
+       mkdnDestroyLink = "md",
+       mkdnTagSpan = "md",
+       mkdnTablePrevRow = "<C-CR>",
+       mkdnToggleToDo = "mt",
+       mkdnFoldSection = "mz",
+       mkdnUnfoldSection = "<leader>mz",
+    },
+    ```
+
+15. markdown-preview
+
+    markdown-preview: <https://github.com/davidgranstrom/nvim-markdown-preview>
+
+    常用的markdown-preview插件命令
+
+    `:MarkdownPreview` 打开markdown-preview
+
+    `:MarkdownPreviewStop` 关掉markdown-preview
+
+    ![markdown preview](./picture/10.png)

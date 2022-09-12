@@ -99,7 +99,13 @@ local function load_plugins()
 			})
 			-- neocroll.nvim
 			use("karb94/neoscroll.nvim")
-
+			-- yank
+			use({
+				"gbprod/yanky.nvim",
+				config = function()
+					require("plugin-config.yanky")
+				end,
+			})
 			-- --------git-------------------
 			use({
 				"lewis6991/gitsigns.nvim",
@@ -210,23 +216,6 @@ local function load_plugins()
 		},
 	})
 end
-
--- 基础配置
-require("basic")
-
--- 加载配色
-require("colorscheme")
-
-local config_path_root = vim.env.VIM
--- 通过vim.cmd加载一些 vimscript commands
-vim.cmd("source" .. config_path_root .. "/extVIM.vim")
-
--- 快捷键映射
-require("keybindings")
-
--- 自动命令
-require("autocmd")
-
 -- 第一次运行会通过git 下载packer插件管理器，同时sync同步一下
 if vim.fn.isdirectory(install_path) == 0 then
 	vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
@@ -235,6 +224,22 @@ if vim.fn.isdirectory(install_path) == 0 then
 else
 	load_plugins()
 end
+
+-- 加载配色
+require("colorscheme")
+
+local config_path_root = vim.env.VIM
+-- 通过vim.cmd加载一些 vimscript commands
+vim.cmd("source" .. config_path_root .. "/extVIM.vim")
+
+-- 基础配置
+require("basic")
+
+-- 快捷键映射
+require("keybindings")
+
+-- 自动命令
+require("autocmd")
 
 -- 插件配置
 --

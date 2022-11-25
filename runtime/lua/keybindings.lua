@@ -37,7 +37,7 @@ map("n", "<F1>", "", opt)
 map("n", "qq", "", opt)
 
 -- magic search
--- map("n", "/", "/\\v", { noremap = true, silent = false })
+map("n", "/", "/\\v", { noremap = true, silent = false })
 
 local norl = keybindingAlias.norl
 map("n", norl.goto_command_mode, ":", { noremap = true, silent = false })
@@ -169,27 +169,21 @@ map(
 -- LSP
 local lsp = keybindingAlias.lsp
 pluginKeys.mapLSP = function(mapbuf)
-	mapbuf("n", lsp.rename, "<cmd>lua vim.lsp.buf.rename()<CR>")
-	mapbuf("n", lsp.code_action, "<cmd>lua vim.lsp.buf.code_action()<CR>")
 	mapbuf("n", lsp.definition, function()
-		require("telescope.builtin").lsp_definitions({
-			initial_mode = "normal",
-		})
+		require("telescope.builtin").lsp_definitions(
+			require("telescope.themes").get_cursor({ initial_mode = "normal" })
+		)
 	end)
-	-- mapbuf("n",
-	--     lsp.definition,
-	--     "<cmd> lua require('telescope.builtin').lsp_definitions({initial_mode = 'normal'})<CR>"
-	-- )
+	mapbuf("n", lsp.references, function()
+		require("telescope.builtin").lsp_references(require("telescope.themes").get_cursor({ initial_mode = "normal" }))
+	end)
 	mapbuf("n", lsp.hover, "<cmd>lua vim.lsp.buf.hover()<CR>")
-	mapbuf(
-		"n",
-		lsp.references,
-		"<cmd>lua require('telescope.builtin').lsp_references({initial_mode = 'normal',theme='get_ivy'})<CR>"
-	)
 	mapbuf("n", lsp.open_flow, "<cmd>lua vim.diagnostic.open_float()<CR>")
 	mapbuf("n", lsp.goto_next, "<cmd>lua vim.diagnostic.goto_next()<CR>")
 	mapbuf("n", lsp.goto_prev, "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-	mapbuf("n", lsp.format, "<cmd>lua vim.lsp.buf.formatting_sync()<CR>")
+	mapbuf("n", lsp.rename, "<cmd>lua vim.lsp.buf.rename()<CR>")
+	mapbuf("n", lsp.code_action, "<cmd>lua vim.lsp.buf.code_action()<CR>")
+	mapbuf("n", lsp.format, "<cmd>lua vim.lsp.buf.format()<CR>")
 end
 
 -- nvim-dap

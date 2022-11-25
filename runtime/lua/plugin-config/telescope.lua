@@ -36,3 +36,43 @@ pcall(telescope.load_extension, "env")
 pcall(telescope.load_extension, "projects")
 -- extension telescope-dap
 pcall(telescope.load_extension, "dap")
+
+-- load session
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local sessionDir = vim.env.VIM .. "/vimSession/"
+
+local function delete_selection(prompt_bufnr, map)
+	actions.close(prompt_bufnr)
+	local selection = action_state.get_selected_entry()
+	-- source session
+	vim.cmd([[!rm ]] .. sessionDir .. selection[1])
+end
+
+local function load_session(prompt_bufnr)
+	actions.close(prompt_bufnr)
+	local selection = action_state.get_selected_entry()
+	-- source session
+	vim.cmd([[
+    bufdo bwipe
+    source ]] .. sessionDir .. selection[1])
+end
+
+local _manage_session = function()
+	local opts = {
+		attach_mappings = function(_, map)
+			map("n", "<cr>", load_session)
+			map("n", "d", delete_selection)
+			return true
+		end,
+		find_command = {
+			"ls",
+			sessionDir,
+		},
+		prompt_title = "Manage session",
+	}
+	require("telescope.builtin").find_files(opts)
+end
+
+vim.keymap.set("n", "<space>s", _manage_session)
+vim.api.nvim_create_user_command("LoadSession", _manage_session, { desc = "load user session,like workspace" })

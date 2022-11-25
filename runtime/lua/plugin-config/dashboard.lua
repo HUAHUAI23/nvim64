@@ -5,6 +5,7 @@ if not status then
 end
 local keybindAlia = vim.env.VIMRUNTIME
 
+db.session_directory = vim.env.VIM .. "/vimSession"
 db.custom_footer = {
 	-- "",
 	"千里之行，始于足下                     ",
@@ -15,6 +16,12 @@ db.custom_center = {
 		icon = "🗃️  ",
 		desc = "Projects                            ",
 		action = "Telescope projects",
+	},
+	{
+		-- icon = "📎  ",
+		icon = "☕  ",
+		desc = "Work Space                          ",
+		action = "LoadSession",
 	},
 	{
 		-- icon = "📎  ",

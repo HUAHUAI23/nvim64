@@ -162,6 +162,8 @@ local M = {
 		mkdnToggleToDo = "mt",
 		mkdnFoldSection = "mz",
 		mkdnUnfoldSection = "<leader>mz",
+		mkdnTableNextCell = "<Leader>mj",
+		mkdnTablePrevCell = "<Leader>mk",
 	},
 	yanky = {
 		yanky_after = "p",

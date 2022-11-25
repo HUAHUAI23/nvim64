@@ -13,6 +13,8 @@ if type(mkd) == "table" and mkd.enable then
 			MkdnTablePrevRow = { "i", mkd.mkdnTablePrevRow },
 			MkdnFoldSection = { "n", mkd.mkdnFoldSection },
 			MkdnUnfoldSection = { "n", mkd.mkdnUnfoldSection },
+			MkdnTableNextCell = { "i", mkd.mkdnTableNextCell },
+			MkdnTablePrevCell = { "i", mkd.mkdnTablePrevCell },
 		},
 	})
 

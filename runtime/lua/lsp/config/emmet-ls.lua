@@ -5,6 +5,7 @@ local opts = {
 		lspComm.keyAttach(bufnr)
 		lspComm.disableFormat(client)
 		lspComm.shwLinDiaAtom(bufnr)
+		lspComm.navic.attach(client, bufnr)
 		-- lspComm.hlSymUdrCursor(client, bufnr)
 	end,
 	handlers = require("lsp.common-config").handlers,

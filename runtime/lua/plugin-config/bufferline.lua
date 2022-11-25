@@ -40,6 +40,11 @@ bufferline.setup({
 				text = "👾outline",
 				text_align = "right",
 			},
+			{
+				filetype = "undotree",
+				text = "👾undo Tree",
+				text_align = "left",
+			},
 		},
 	},
 	-- highlights = {

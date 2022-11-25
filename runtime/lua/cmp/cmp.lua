@@ -129,7 +129,7 @@ cmp.setup.cmdline("/", {
 {
     { name = 'path' }
 }, {
-    { name = 'cmdline' } 和group_index意思相同，上面的优先级越高，即paht的优先级高于
+    { name = 'cmdline' } 和group_index意思相同，上面的优先级越高，即path的优先级高于
 }                         cmdline，path源ok的话将优先匹配path
 --]]
 
@@ -166,8 +166,8 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local config_path = vim.env.VIM
 
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
--- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/lua/cmp/snippets/vscode" } })
-require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/lua/cmp/snippets/lua" } })
+-- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/abc/cmp/snippets/vscode" } })
+require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/abc/cmp/snippets/lua" } })
 
 -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
 -- { "i", "s" } Indicates insertion mode and selection mode, respectively

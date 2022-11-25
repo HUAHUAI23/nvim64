@@ -3,6 +3,8 @@ if not status then
 	vim.notify("没有找到 lualine")
 	return
 end
+-- 为特定文件类型的buffer设置 特定的状态栏
+local my_extension = { sections = { lualine_a = { "mode" } }, filetypes = { "undotree", "lspsagaoutline", "diff" } }
 
 lualine.setup({
 	options = {
@@ -23,7 +25,7 @@ lualine.setup({
 		},
 		globalstatus = true,
 	},
-	extensions = { "nvim-tree", "toggleterm", "quickfix", "nvim-dap-ui", "man" },
+	extensions = { "nvim-tree", "toggleterm", "quickfix", "nvim-dap-ui", "man", my_extension },
 	sections = {
 		-- lualine_c = {
 		--   "filename",

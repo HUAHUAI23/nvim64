@@ -8,7 +8,7 @@ vim.diagnostic.config({
 	update_in_insert = false,
 	float = {
 		border = "rounded",
-		source = "always",
+		source = "always", -- show diagnostices sources
 	},
 })
 -- Change diagnostic symbols in the sign column (gutter)
@@ -28,7 +28,6 @@ end
 -- 	opts.border = "rounded"
 -- 	return opts
 -- end
-
 -- if neovim version >= 8.0,the above configuration	will not work
 -- and you can use following configuration
 -- see more https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt
@@ -36,6 +35,7 @@ require("lspconfig.ui.windows").default_options.border = "rounded"
 
 -- lspsage offers some interesting stuff eg: outline floatterm
 local saga = require("lspsaga")
+-- TODO:设置saga的高亮组
 saga.init_lsp_saga({
 	border_style = "rounded",
 	code_action_icon = "💡",

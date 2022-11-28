@@ -8,14 +8,17 @@ vim.o.sidescrolloff = 8
 
 -- 使用相对行号
 vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 -- 高亮所在行
 vim.wo.cursorline = true
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
+-- vim.wo.signcolumn = "yes:1"
 -- 右侧参考线，超过表示代码太长了，考虑换行
-vim.wo.colorcolumn = "80"
+-- vim.wo.colorcolumn = "80"
+vim.o.colorcolumn = "80"
 
+-- TODO: sessionoptions
 -- -- indent
 -- -- 缩进2个空格等于一个Tab
 -- vim.o.tabstop = 2
@@ -25,11 +28,11 @@ vim.wo.colorcolumn = "80"
 -- -- >> << 时移动长度
 -- vim.o.shiftwidth = 2
 -- vim.bo.shiftwidth = 2
--- -- 空格替代tab
+-- expandtab Tab键会被替换为空格（例如一个tab键被替换成四个空格）
+-- noexpandtab Tab键不会被替换成空格
 -- vim.o.expandtab = true
 -- vim.bo.expandtab = true
 
--- -
 -- 新行对齐当前行
 vim.o.autoindent = true
 vim.bo.autoindent = true
@@ -43,8 +46,8 @@ vim.o.smartcase = true
 vim.o.hlsearch = false
 -- 边输入边搜索
 vim.o.incsearch = true
--- 命令行高为2，提供足够的显示空间
 
+-- 命令行高为1，提供足够的显示空间
 vim.o.cmdheight = 1
 -- 当文件被外部程序修改时，自动加载
 vim.o.autoread = true
@@ -58,32 +61,42 @@ vim.o.whichwrap = "<,>,[,]"
 vim.o.hidden = true
 
 -- 禁止创建备份文件
+-- don't create backup file (swap file)
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
 
--- smaller updatetime
-vim.o.updatetime = 500 --300  default 4000
--- 设置 timeoutlen 为等待键盘快捷键连击时间500毫秒，可根据需要设置
--- map映射的组合键，输入一个键 最长等待时间1000秒 等待下一个键输入
+-- default 4000 -- if no type in 1000ms, then write the swap file to disk
+-- also a wait time for the CursorHold event
+-- vim.o.updatetime = 1000 --1000
+-- 设置 timeoutlen 为等待键盘快捷键连击时间500毫秒，可根据需要设置,例如快捷键shift+q
+-- map映射的组合键，输入一个键 最长等待时间500秒 等待下一个键输入
 -- 遇到问题详见：https://github.com/nshen/learn-neovim-lua/issues/1
-vim.o.timeoutlen = 1000 --500
+vim.o.timeoutlen = 500 --500
 
 -- split window 从下边和右边出现
 vim.o.splitbelow = true
 vim.o.splitright = true
+
 -- 自动补全不自动选中
 vim.g.completeopt = "menu,menuone,noselect,noinsert"
 
 -- 样式 使neovim支持 termguicolors
-vim.o.termguicolors = true
-vim.opt.termguicolors = true
+-- 已经定义在colorscheme 文件中
+-- vim.o.termguicolors = true
+-- vim.opt.termguicolors = true
 -- https://stackoverflow.com/questions/15375992/vim-difference-between-t-co-256-and-term-xterm-256color-in-conjunction-with-tmu
 -- vim.o.t_Co = 256
+
 -- 不可见字符的显示，这里只把空格显示为一个点
-vim.o.list = false
--- vim.o.listchars = "space:·,tab:··"
+vim.opt.list = true
 vim.o.listchars = "tab:··,trail:▫"
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
+-- vim.o.list = false
+-- vim.o.listchars = "space:·,tab:··"
+-- vim.o.listchars = "tab:··,trail:▫"
+
 -- 补全增强
 vim.o.wildmenu = true
 -- Dont' pass messages to |ins-completin menu|
@@ -92,12 +105,15 @@ vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.pumheight = 10
 
 -- 永远显示 tabline
+-- tabline winbar statusbar
 vim.o.showtabline = 2
 
 -- 使用增强状态栏插件后不再需要 vim 的模式提示
 vim.o.showmode = false
+
 -- 配置剪切板
 -- vim.opt.clipboard = "unnamedplus"
+
 -- 鼠标移动事件支持
 -- vim.o.mousemoveevent = true
 -- 鼠标支持

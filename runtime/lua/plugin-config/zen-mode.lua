@@ -7,7 +7,7 @@ zen.setup({
 	window = {
 		backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
 		width = 0.8, -- width of the Zen window
-		height = 0.8, -- height of the Zen window
+		height = 1, -- height of the Zen window
 		options = {
 			signcolumn = "no", -- disable signcolumn
 			number = false, -- disable number column
@@ -17,5 +17,8 @@ zen.setup({
 			foldcolumn = "0", -- disable fold column
 			list = false, -- disable whitespace characters
 		},
+	},
+	plugins = {
+		twilight = { enabled = true },
 	},
 })

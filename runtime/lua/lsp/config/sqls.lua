@@ -3,10 +3,11 @@ local opts = {
 	on_attach = function(client, bufnr)
 		local lspComm = require("lsp.common-config")
 		lspComm.keyAttach(bufnr)
-		lspComm.shwLinDiaAtom(bufnr)
-		lspComm.disableFormat(client)
 		lspComm.navic.attach(client, bufnr)
-		-- lspComm.hlSymUdrCursor(client, bufnr)
+		vim.opt_local.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
+		-- lspComm.shwLinDiaAtom(bufnr)
+		-- lspComm.hlSymUdrCursor(client, bufnr)  -- vim-illuminate plugin do this
+		-- lspComm.disableFormat(client)
 	end,
 	handlers = require("lsp.common-config").handlers,
 }

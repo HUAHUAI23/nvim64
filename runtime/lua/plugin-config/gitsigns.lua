@@ -19,5 +19,5 @@ gitsigns.setup({
 		row = 0,
 		col = 1,
 	},
-	on_attach = require("keybindings").gitsigns_on_attach,
+	on_attach = require("keybindings").pluginKeys.gitsigns_on_attach,
 })

@@ -2,11 +2,13 @@
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
+local util = require("lspconfig.util")
 local root_files = {
 	"project.md",
 }
-local util = require("lspconfig.util")
 local opts = {
+	--  see more: https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt  #root_patter
+	root_dir = util.root_pattern(unpack(root_files)),
 	settings = {
 		Lua = {
 			runtime = {
@@ -33,15 +35,13 @@ local opts = {
 	on_attach = function(client, bufnr)
 		local lspComm = require("lsp.common-config")
 		lspComm.keyAttach(bufnr)
-		lspComm.disableFormat(client)
-		lspComm.shwLinDiaAtom(bufnr)
+		-- lspComm.disableFormat(client)
+		-- lspComm.shwLinDiaAtom(bufnr)
 		lspComm.navic.attach(client, bufnr)
+		vim.opt_local.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 		-- lspComm.hlSymUdrCursor(client, bufnr)
 	end,
 	handlers = require("lsp.common-config").handlers,
-	root_dir = function(fname)
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-	end,
 }
 
 return {

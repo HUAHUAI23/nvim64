@@ -9,7 +9,7 @@ telescope.setup({
 		prompt_prefix = "🔍",
 		-- 打开弹窗后进入的初始模式，默认为 normal，也可以是 insert
 		initial_mode = "normal",
-
+		-- default mappings see https://github.com/nvim-telescope/telescope.nvim
 		mappings = {
 			n = {
 				["q"] = "close",
@@ -36,43 +36,48 @@ pcall(telescope.load_extension, "env")
 pcall(telescope.load_extension, "projects")
 -- extension telescope-dap
 pcall(telescope.load_extension, "dap")
+-- extension telescope-session
+pcall(telescope.load_extension, "xray23")
+-- extension telescope-color
+pcall(telescope.load_extension, "i42")
 
 -- load session
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
-local sessionDir = vim.env.VIM .. "/vimSession/"
 
-local function delete_selection(prompt_bufnr, map)
+vim.api.nvim_create_user_command("SessionSv", function()
+	vim.api.nvim_cmd(vim.api.nvim_parse_cmd("Telescope xray23 save", {}), {})
+end, { desc = "load user session,like workspace" })
+
+-- --------load DAP launch
+local function load_launch(prompt_bufnr)
 	actions.close(prompt_bufnr)
 	local selection = action_state.get_selected_entry()
-	-- source session
-	vim.cmd([[!rm ]] .. sessionDir .. selection[1])
+	-- vim.cmd([[echo "]] .. selection[1] .. [["]])
+	local vscodeDir = vim.fn.getcwd() .. "/.vscode/"
+	-- local adapterAndFt = [[{cppdbg = { "c", "cpp" }}]]
+	-- loadstring 将字符串转变成table https://blog.csdn.net/yuanfengyun/article/details/23408549
+	-- local typeConf = loadstring("return " .. adapterAndFt)()
+	local adapter = vim.fn.input("adapter: ", "")
+	local typeConf = {}
+	typeConf[adapter] = {}
+	local filetype = vim.fn.input("filetype: ", "")
+	table.insert(typeConf[adapter], filetype)
+	-- print(vim.inspect(typeConf))
+	require("dap.ext.vscode").load_launchjs(nil, typeConf)
+	-- require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" } })
+	vim.cmd([[edit ]] .. vscodeDir .. selection[1])
 end
 
-local function load_session(prompt_bufnr)
-	actions.close(prompt_bufnr)
-	local selection = action_state.get_selected_entry()
-	-- source session
-	vim.cmd([[
-    bufdo bwipe
-    source ]] .. sessionDir .. selection[1])
-end
-
-local _manage_session = function()
+local _manage_launch = function()
 	local opts = {
 		attach_mappings = function(_, map)
-			map("n", "<cr>", load_session)
-			map("n", "d", delete_selection)
+			map("n", "<cr>", load_launch)
 			return true
 		end,
-		find_command = {
-			"ls",
-			sessionDir,
-		},
-		prompt_title = "Manage session",
+		find_command = { "ls", ".vscode" },
+		prompt_title = "Manage launch",
 	}
 	require("telescope.builtin").find_files(opts)
 end
-
-vim.keymap.set("n", "<space>s", _manage_session)
-vim.api.nvim_create_user_command("LoadSession", _manage_session, { desc = "load user session,like workspace" })
+vim.api.nvim_create_user_command("LoadCodeLaunch", _manage_launch, { desc = "load vscode like launch" })

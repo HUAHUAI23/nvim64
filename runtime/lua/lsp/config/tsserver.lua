@@ -7,13 +7,16 @@ local opts = {
 	on_attach = function(client, bufnr)
 		local lspComm = require("lsp.common-config")
 		lspComm.keyAttach(bufnr)
-		lspComm.shwLinDiaAtom(bufnr)
 		lspComm.navic.attach(client, bufnr)
+		-- lspComm.shwLinDiaAtom(bufnr)
+		-- lspComm.disableFormat(client)
 		-- lspComm.hlSymUdrCursor(client, bufnr)
+		vim.opt_local.winbar = lspComm.winbarrs
 	end,
+	single_file_support = true,
 	handlers = require("lsp.common-config").handlers,
 	root_dir = function(fname)
-		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+		return util.root_pattern(unpack(root_files))(fname)
 	end,
 }
 return {

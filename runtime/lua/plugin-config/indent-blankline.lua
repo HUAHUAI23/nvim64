@@ -3,10 +3,9 @@ if not status then
 	vim.notify("没有找到 indent_blankline")
 	return
 end
-vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("eol:↴")
 indent_blankline.setup({
+	-- show_trailing_blankline_indent = true,
+	-- show_end_of_line = true,
 	-- 空行占位
 	space_char_blankline = " ",
 	-- 用 treesitter 判断上下文
@@ -30,5 +29,6 @@ indent_blankline.setup({
 	},
 	-- -- 竖线样式
 	char = "▏",
-	-- char = '¦'
+	-- char = "╬",
+	-- char = "¦",
 })

@@ -1,11 +1,6 @@
-local status, mkdnflow = pcall(require, "mkdnflow")
-if not status then
-	vim.notify("没有找到 mkdnflow")
-	return
-end
 local mkd = require("keybindingAlias").mkdnflow
 if type(mkd) == "table" and mkd.enable then
-	mkdnflow.setup({
+	require("mkdnflow").setup({
 		mappings = {
 			MkdnDestroyLink = { "n", mkd.mkdnDestroyLink },
 			MkdnTagSpan = { "v", mkd.mkdnTagSpan },

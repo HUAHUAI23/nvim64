@@ -6,10 +6,22 @@ vim.cmd([[
   augroup end
 ]])
 
+local on_windows = vim.loop.os_uname().version:match("Windows")
+local function join_paths(...)
+	local path_sep = on_windows and "\\" or "/"
+	local result = table.concat({ ... }, path_sep)
+	return result
+end
+
+local packer_dir = vim.env.VIM .. "/abc/packeeeee"
+vim.cmd("set packpath=" .. join_paths(packer_dir, "nvim", "site"))
+local package_root = join_paths(packer_dir, "nvim", "site", "pack")
+local install_path = join_paths(package_root, "packer", "start", "packer.nvim")
+local compile_path = join_paths(install_path, "plugin", "packer_compiled.lua")
+
 -- 当在新环境没有packer.nvim时 会自动下载安装packer.nvim
 local ensure_packer = function()
 	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
 		vim.cmd([[packadd packer.nvim]])
@@ -17,8 +29,8 @@ local ensure_packer = function()
 	end
 	return false
 end
-local packer_bootstrap = ensure_packer()
 
+local packer_bootstrap = ensure_packer()
 return require("packer").startup({
 	function(use)
 		-- Packer can manage itself
@@ -368,6 +380,8 @@ return require("packer").startup({
 		end
 	end,
 	config = {
+		package_root = package_root,
+		compile_path = compile_path,
 		display = {
 			open_fn = function()
 				return require("packer.util").float({ border = "rounded" })

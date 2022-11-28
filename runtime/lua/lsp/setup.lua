@@ -3,10 +3,12 @@ if not status then
 	vim.notify("没有找到 mason.nvim")
 	return
 end
+local sharePath = require("commConf").sharePath
 mason.setup({
 	ui = {
 		border = "rounded",
 	},
+	install_root_dir = vim.env.VIM .. "/abc/mason",
 })
 
 local mason_lspconfig

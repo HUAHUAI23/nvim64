@@ -220,11 +220,11 @@ cmp.setup.filetype({ "TelescopePrompt", "text", "" }, {
 -- custom snippets
 -- https://github.com/rafamadriz/friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
-local config_path = vim.fn.stdpath("config")
+local config_path = vim.env.VIM
 
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
--- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/lua/cmp/snippets/vscode" } })
-require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/lua/cmp/snippets/lua" } })
+-- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/abc/cmp/snippets/vscode" } })
+require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/abc/cmp/snippets/lua" } })
 
 -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
 -- { "i", "s" } Indicates insertion mode and selection mode, respectively
@@ -298,25 +298,25 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- leader cc|ee
 -- leader cv
 -- -- FIX: https://github.com/mfussenegger/nvim-dap/issues/562
-vim.api.nvim_set_var("copilot_filetypes", {
-	["*"] = false,
-	-- ["dap-repl"] = false,
-	["python"] = true,
-	["lua"] = true,
-	["javascript"] = true,
-	["sh"] = true,
-})
-
-vim.api.nvim_set_keymap(
-	"i",
-	keybindingAlias.copilot.copilotAccept,
-	"copilot#Accept('')",
-	{ noremap = true, silent = true, expr = true, desc = "accept copilot suggestion" }
-)
-vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap(
-	"i",
-	keybindingAlias.copilot.copilotPanel,
-	"<cmd>:Copilot panel<cr>",
-	{ noremap = true, silent = true, desc = "open copilot panel" }
-)
+-- vim.api.nvim_set_var("copilot_filetypes", {
+-- 	["*"] = false,
+-- 	-- ["dap-repl"] = false,
+-- 	["python"] = true,
+-- 	["lua"] = true,
+-- 	["javascript"] = true,
+-- 	["sh"] = true,
+-- })
+--
+-- vim.api.nvim_set_keymap(
+-- 	"i",
+-- 	keybindingAlias.copilot.copilotAccept,
+-- 	"copilot#Accept('')",
+-- 	{ noremap = true, silent = true, expr = true, desc = "accept copilot suggestion" }
+-- )
+-- vim.g.copilot_no_tab_map = true
+-- vim.api.nvim_set_keymap(
+-- 	"i",
+-- 	keybindingAlias.copilot.copilotPanel,
+-- 	"<cmd>:Copilot panel<cr>",
+-- 	{ noremap = true, silent = true, desc = "open copilot panel" }
+-- )

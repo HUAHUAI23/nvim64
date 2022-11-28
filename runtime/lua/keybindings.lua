@@ -888,4 +888,6 @@ keybind.magiceSearch = {
 	nmagicSearch = keybindingAlias.switch.nmagicSearch,
 }
 
+require("commConf").magiceSearchSwitches(keybind.magicSearch)
+
 return keybind

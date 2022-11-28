@@ -3,13 +3,6 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- add runtimpath
--- see :h 'runtimepath'
-local commRuntimePath = require("commConf").runtimePath
-local luaPath = commRuntimePath .. "/xray23"
--- vim.cmd([[set runtimepath=$VIMRUNTIME,$VIM/xray23]])
-vim.cmd([[set runtimepath=$VIMRUNTIME]])
-vim.opt.runtimepath:append(luaPath)
 -- 基础配置
 require("basic")
 
@@ -20,7 +13,7 @@ require("colorscheme")
 require("plugins")
 
 -- 通过vim.cmd加载一些 vimscript commands
-vim.cmd("source" .. commRuntimePath .. "/extVIM.vim")
+vim.cmd("source" .. vim.env.VIM .. "/extVIM.vim")
 
 -- 快捷键映射
 local keybind = require("keybindings")

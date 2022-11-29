@@ -12,8 +12,8 @@ local function join_paths(...)
 	local result = table.concat({ ... }, path_sep)
 	return result
 end
-
-local packer_dir = vim.env.VIM .. "/abc/packeeeee"
+local sharePath = require("commConf").sharePath
+local packer_dir = sharePath .. "/abc/packeeeee"
 vim.cmd("set packpath=" .. join_paths(packer_dir, "nvim", "site"))
 local package_root = join_paths(packer_dir, "nvim", "site", "pack")
 local install_path = join_paths(package_root, "packer", "start", "packer.nvim")
@@ -31,6 +31,7 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
+
 return require("packer").startup({
 	function(use)
 		-- Packer can manage itself
@@ -42,7 +43,12 @@ return require("packer").startup({
 		use({ "kyazdani42/nvim-web-devicons" })
 
 		-- 主题
-		use("ajmwagar/vim-deus")
+		use({
+			"ajmwagar/vim-deus",
+			config = function()
+				require("colorscheme")
+			end,
+		})
 
 		use({ "sam4llis/nvim-tundra" })
 
@@ -308,12 +314,12 @@ return require("packer").startup({
 			requires = { "nvim-lua/plenary.nvim" },
 		})
 		-- ui-lsp_signature
-		use({
-			"ray-x/lsp_signature.nvim",
-			config = function()
-				require("lsp.lsp-signature")
-			end,
-		})
+		-- use({
+		-- 	"ray-x/lsp_signature.nvim",
+		-- 	config = function()
+		-- 		require("lsp.lsp-signature")
+		-- 	end,
+		-- })
 		-- ui-lspsaga
 		use({
 			"glepnir/lspsaga.nvim",
@@ -371,7 +377,7 @@ return require("packer").startup({
 		-- tabnine
 		use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 		--  GitHub Copilot
-		use({ "github/copilot.vim" })
+		-- use({ "github/copilot.vim" })
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins

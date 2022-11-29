@@ -9,12 +9,14 @@ fi
 
 cp "${iniDir}"/int42.sh "${iniDir}"/nvim-linux64/bin/
 cp "${iniDir}"/open.sh "${iniDir}"/nvim-linux64/bin/
+
 cp -R "${iniDir}"/share/nvim/* "${iniDir}"/nvim-linux64/share/nvim/
 # cp -R "${iniDir}"/share/nvim/extVIM.vim "${iniDir}"/nvim-linux64/share/nvim/
+
 mkdir -p "${iniDir}"/nvim-linux64/share/nvim/abc/cmp/snippets/{lua,vscode}
 mkdir -p "${iniDir}"/nvim-linux64/share/nvim/xray23
+
 cp -R "${iniDir}"/runtime/* "${iniDir}"/nvim-linux64/share/nvim/xray23
-# mv "${iniDir}"/nvim-linux64/share/nvim/xray23/init.lua "${iniDir}"/nvim-linux64/share/nvim/runtime/lua/
 # mv "${iniDir}"/nvim-linux64/share/nvim/xray23/init.lua "${iniDir}"/nvim-linux64/bin
 
 mv "${iniDir}"/initial.sh "${iniDir}"/trush

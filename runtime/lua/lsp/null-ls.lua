@@ -21,11 +21,11 @@ local sources = {
 	-- formatting  autopep8  djlint  sql_formatter  stylua  shfmt
 	-- fixjson  eslint_d  black  clang_format  prettier markdownlint
 	formatting.shfmt,
-	formatting.black.with({ extra_args = { "--fast" } }),
+	formatting.black.with({ extra_args = { "--fast" }, timeout = 20000 }),
 	formatting.clang_format,
 	formatting.fixjson,
 	formatting.prettier.with({
-		disabled_filetypes = { "markdown", "javascript" },
+		disabled_filetypes = { "markdown", "javascript", "typescript" },
 		prefer_local = "node_modules/.bin",
 		-- milliseconds
 		-- NOTE: The maximum processing time of prettier,

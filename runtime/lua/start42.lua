@@ -7,7 +7,7 @@ vim.g.loaded_netrwPlugin = 1
 require("basic")
 
 -- 定义颜色主题
-require("colorscheme")
+-- require("colorscheme")
 
 -- Packer插件管理
 require("plugins")

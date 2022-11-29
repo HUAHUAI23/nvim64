@@ -98,7 +98,7 @@ end
 -- js
 -- dap.adapters.node2 = dap_config.nodejs.adapter
 -- dap.configurations.javascript = dap_config.nodejs.configuration
-local sharePath = vim.env.VIM
+local sharePath = require("commConf").sharePath
 -- python
 require("dap-python").setup(sharePath .. "/abc/mason/packages/debugpy/venv/bin/python")
 

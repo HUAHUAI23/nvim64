@@ -3,12 +3,11 @@ if not status then
 	vim.notify("没有找到 mason.nvim")
 	return
 end
-local sharePath = require("commConf").sharePath
 mason.setup({
 	ui = {
 		border = "rounded",
 	},
-	install_root_dir = vim.env.VIM .. "/abc/mason",
+	install_root_dir = require("commConf").sharePath .. "/abc/mason",
 })
 
 local mason_lspconfig
@@ -92,16 +91,16 @@ local servers = {
 	bashls = require("lsp.config.bash"),
 	pyright = require("lsp.config.pyright"),
 	tsserver = require("lsp.config.tsserver"),
+	gopls = require("lsp.config.gopls"),
+	clangd = require("lsp.config.clangd"),
 	-- quick_lint_js = require("lsp.config.quick-lint-js"),
-	-- sqls = require("lsp.config.sqls"),
+	sqls = require("lsp.config.sqls"),
 	-- css html
 	emmet_ls = require("lsp.config.emmet-ls"),
 	html = require("lsp.config.html"),
 	cssls = require("lsp.config.css"),
-	-- css html
+	-- json
 	jsonls = require("lsp.config.json"),
-	clangd = require("lsp.config.clangd"),
-	gopls = require("lsp.config.gopls"),
 	-- vim
 	vimls = require("lsp.config.vimls"),
 }

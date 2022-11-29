@@ -220,7 +220,7 @@ cmp.setup.filetype({ "TelescopePrompt", "text", "" }, {
 -- custom snippets
 -- https://github.com/rafamadriz/friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
-local config_path = vim.env.VIM
+local config_path = require("commConf").sharePath
 
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
 -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/abc/cmp/snippets/vscode" } })

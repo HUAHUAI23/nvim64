@@ -125,6 +125,7 @@ local M = {
 		fuzzy_find_insertmode = "<C-f>",
 		find_files = "<space>4",
 		buffer_select = "<space>5",
+		session_load = "<space>s",
 	},
 	dap = {
 		debugg = "<F5>",

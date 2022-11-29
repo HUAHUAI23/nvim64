@@ -509,14 +509,7 @@ keybind.hop = {
 -- ------------
 -- whick-key
 --
-local wk = require("which-key")
--- vim.keymap.set("n", "<space>s", "<cmd>Telescope xray23 list<cr>")
-wk.register({
-	["<space>"] = {
-		name = "+Telescope session",
-		s = { "<cmd>Telescope xray23 list<cr>", "vim session list" },
-	},
-})
+vim.keymap.set("n", keybindingAlias.telescope.session_load, "<cmd>Telescope xray23 list<cr>")
 
 -- ------------
 -- plugs-others
@@ -883,7 +876,7 @@ function keybind.unsetKey(unsetmap)
 	end
 end
 
-keybind.magiceSearch = {
+keybind.magicSearch = {
 	vmagicSearch = keybindingAlias.switch.vmagicSearch,
 	nmagicSearch = keybindingAlias.switch.nmagicSearch,
 }

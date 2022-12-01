@@ -89,7 +89,7 @@ vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- vim.o.t_Co = 256
 
 -- 不可见字符的显示，这里只把空格显示为一个点
-vim.opt.list = true
+vim.opt.list = require("commConf").listchar
 vim.o.listchars = "tab:··,trail:▫"
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")

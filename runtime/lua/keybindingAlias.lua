@@ -97,9 +97,9 @@ local M = {
 	},
 	lsp = {
 		--treesitter rename
-		tsRename = "ra",
-		rename = "rn",
-		code_action = "ca",
+		tsRename = "<leader>ra",
+		rename = "<leader>rn",
+		code_action = "<leader>ca",
 		definition = "gd",
 		hover = "gh",
 		references = "gr",
@@ -108,8 +108,8 @@ local M = {
 		implementations = "<leader>gi",
 		-- diagnostic
 		open_flow = "gl",
-		goto_next = "gj",
-		goto_prev = "gk",
+		goto_next = "g<left>",
+		goto_prev = "g<right>",
 		format = "<leader>f",
 		-- outline
 		LSoutline = "<space>3",

@@ -27,7 +27,7 @@ nvim64.tar包的目录结构如下
 
 nvim-linux64.tar是neovim官方的portable版  <https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.tar.gz>
 
-将nvim64.tar包 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.tar> 下载下来后执行如下命令
+将nvim64.tar包 <https://github.com/HUAHUAI23/nvim64/releases/download/v2.0/nvim64.tar> 下载下来后执行如下命令
 
 ```plain
 tar -xf nvim.tar
@@ -40,7 +40,7 @@ cd nvim-linux64/bin/
 source int42.sh
 ```
 
-或者下载打包好的版本 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.packaged.tar.gz>，打包好的版本已经将插件和LSP相关的东西打包进去了，所以**不需要执行下面`:TSupdate` `:PackSync` `:MasonInstall` 等操作**，但是依然要保证系统有python venv和nodejs环境。
+或者下载打包好的版本 <https://github.com/HUAHUAI23/nvim64/releases/download/v2.0/nvim64.tar.gz>，打包好的版本已经将插件和LSP相关的东西打包进去了，所以**不需要执行下面`:TSupdate` `:PackSync` `:MasonInstall` 等操作**，但是依然要保证系统有python venv和nodejs环境。
 
 ```plain
 # 打包版本的使用
@@ -73,7 +73,7 @@ python venv: `sudo apt install python3 python3-venv`
 
 **下面视频展示第一次安装我的neovim过程**
 
-![安装我的neovim](./picture/1.gif)
+https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-8f7d-5c3a831b3536.mp4
 
 ### 我的neovim可以做什么
 

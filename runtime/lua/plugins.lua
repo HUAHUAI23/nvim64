@@ -223,6 +223,24 @@ return require("packer").startup({
 			cmd = { "ColorizerToggle", "ColorizerAttachToBuffer", "ColorizerDetachFromBuffer" },
 		})
 
+		-- the more powerful %
+		-- matchup
+		use({
+			"andymass/vim-matchup",
+			setup = function()
+				-- may set any options here
+				vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			end,
+		})
+
+		-- vim.notify
+		use({
+			"rcarriga/nvim-notify",
+			config = function()
+				require("plugin-config.nvim-notify")
+			end,
+		})
+
 		-- something like lsp
 		-- ---------------------------------------------------------
 		-- TODO Comments

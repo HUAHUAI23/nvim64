@@ -10,6 +10,8 @@
 
 - 网络环境可以流畅的访问github
 
+- 如果已经有自己的nvim配置文件，务必确保自己的配置文件~/.config/nvim 不会干扰本nvim的配置文件，可以将自己的配置文件目录的名字进行修改，以免产生冲突
+
 ### 如何安装
 
 nvim64.tar包的目录结构如下
@@ -23,7 +25,7 @@ nvim64.tar包的目录结构如下
 └── share
 ```
 
-nvim-linux64.tar是neovim官方的portable版  <https://github.com/neovim/neovim/releases/tag/v0.7.2>
+nvim-linux64.tar是neovim官方的portable版  <https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.tar.gz>
 
 将nvim64.tar包 <https://github.com/HUAHUAI23/nvim64/releases/download/v1.1/nvim64.tar> 下载下来后执行如下命令
 
@@ -53,11 +55,11 @@ n
 
 lite版本参考: <https://github.com/HUAHUAI23/nvim64lite>
 
-第一次进入neovim后，neovim会自动下载插件,下载完插件后可以退出待第二次继续进入neovim，第二次进入neovim时请执行`:TSupdate` 更新treesitter和执行`:PackSync` 更新插件，为保证LSP正常工作，须执行`:Mason` 然后将这些全部安装`"bash-language-server", "shfmt", "shellcheck", "stylua", "lua-language-server", "black", "pyright", "pylint", "debugpy", "clang-format", "clangd", "cpptools", "eslint-lsp", "eslint_d", "node-debug2-adapter", "typescript-language-server", "quick-lint-js", "prettier", "sqls", "sql-formatter", "json-lsp", "html-lsp", "fixjson", "emmet-ls", "css-lsp", "gopls"`
+第一次进入neovim后，neovim会自动下载插件,下载完插件后可以退出待第二次继续进入neovim，第二次进入neovim时请执行`:TSupdate` 更新treesitter和执行`:PackSync` 更新插件，为保证LSP正常工作，须执行`:Mason` 然后将这些全部安装`"bash-language-server", "shfmt", "shellcheck", "stylua", "lua-language-server", "black", "pyright", "debugpy", "clang-format", "clangd", "cpptools", "node-debug2-adapter", "typescript-language-server", "quick-lint-js", "prettier", "sqls", "sql-formatter", "json-lsp", "html-lsp", "fixjson", "emmet-ls", "css-lsp", "gopls", "codelldb", "vim-language-server"`
 
-在第二次进入neovim后 输入`MasonInstall bash-language-server shfmt shellcheck stylua lua-language-server black pyright pylint debugpy clang-format clangd cpptools eslint-lsp eslint_d node-debug2-adapter typescript-language-server quick-lint-js prettier sqls sql-formatter json-lsp html-lsp fixjson emmet-ls css-lsp markdownlint gopls`
+在第二次进入neovim后 输入`:MasonInstall  bash-language-server shfmt shellcheck stylua lua-language-server black pyright debugpy clang-format clangd cpptools node-debug2-adapter typescript-language-server quick-lint-js prettier sqls sql-formatter json-lsp html-lsp fixjson emmet-ls css-lsp markdownlint gopls vim-language-server codelldb`
 
-如果没成功可以多执行几次 `:PackSync` 保证Mason插件成功安装，然后再执行 `MasonInstall`
+如果没成功可以多执行几次 `:PackSync` 保证Mason插件成功安装，然后再执行 `:MasonInstall`
 
 Mason安装上述**LSP** **DAP** **Linter** **Formatter** 可能需要安装**nodejs**，**python** **venv**，**golang**环境。
 
@@ -67,17 +69,39 @@ golang: `sudo apt install golang`
 
 python venv: `sudo apt install python3 python3-venv`
 
-**下面gif动图展示第一次安装我的neovim过程**
+**javascript typescript** 的格式化插件用的是 `deno` 不是 `prettier`,需要单独安装 [deno](https://github.com/denoland/deno)
+
+**下面视频展示第一次安装我的neovim过程**
 
 ![安装我的neovim](./picture/1.gif)
 
 ### 我的neovim可以做什么
 
-我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go的LSP，代码调试功能配置了python和nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览。
+我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go, vim的LSP，代码调试功能配置了python, c, nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览。
 
 #### 我的neovim首页
 
 ![我的neovim首页](./picture/8.png)
+
+配置有三个配色，可以通过颜色插件进行选择 **`Telescope i42 color23`**
+
+对于终端背景与nvim有差距层次问题可以通过让终端背景色与nvim背景色一致解决 **背景色** `#2C323B` nvim 背景高亮组 **`Normal` `NormalNC` `NormalFloat`**
+
+![color manager](./picture/colormanager.png)
+
+**deus** <https://github.com/theniceboy/nvim-deus>
+
+![deus](./picture/deus.png)
+
+**tundra** <https://github.com/sam4llis/nvim-tundra>
+
+![tundra1](./picture/tundra1.png)
+
+![tundra2](./picture/tundra2.png)
+
+**everforest** <https://github.com/sainnhe/everforest>
+
+![everforest](./picture/everforest.png)
 
 ---
 
@@ -91,7 +115,7 @@ python venv: `sudo apt install python3 python3-venv`
 
 - `ctrl-i` 表示组合键 `ctrl` `i` ,`sp` 表示组合键 `s` `p` 。
 
-- `<space>` 表示空格键 `<CR>` 表示enter键 `<Tab>` 表示Tab键。
+- `<space>` 表示空格键 `<CR>` 表示enter键 `<Tab>` 表示Tab键，本配置的`<Leader>`表示键位`;`。
 
 - `|` 表示或
 
@@ -190,7 +214,7 @@ python venv: `sudo apt install python3 python3-venv`
 
   `:s/a/b/g` 将一行中找到的a均换成b
 
-  `:%s/a/b/g` 将当前buffer中所有的找到的a替换成b
+  `:%s/a/b/g` 将当前buffer中所有的找到的a替换成b (%代表当前文件名即当前buffer)
 
   `:2,6s/a/b/g` 将2到6行的找到的a替换成b
 
@@ -200,37 +224,63 @@ python venv: `sudo apt install python3 python3-venv`
 
 ### 2.1 配置文件目录结构说明
 
-neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文件或init.lua文件，sysinit.vim在neovim启动阶段也会被加载，一般这个文件在目录 `$VIM/sysinit.vim` 下，更详细的说明参考`:h config` 。在neovim启动过程中，sysinit.vim会拉起我的neovim配置，sysinit.vim在目录 `nvim-linux64/share/nvim/` 下，我的配置文件在吗目录 `nvim-linux64/share/nvim/runtime/lua/` 下，下面是目录`nvim-linux64/share/nvim/runtime/lua/` 的目录结构。
+neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文件或init.lua文件，sysinit.vim在neovim启动阶段也会被加载，一般这个文件在目录 `$VIM/sysinit.vim` 下，更详细的说明参考`:h config` 。在neovim启动过程中，sysinit.vim会拉起我的neovim配置,参考`:h startup`，sysinit.vim在目录 `nvim-linux64/share/nvim/` 下，我的配置文件在目录 `nvim-linux64/share/nvim/xray23/lua/` 下，下面是目录`nvim-linux64/share/nvim/xray23/lua/` 的目录结构。
 
 ```plain
-.
 ├── autocmd.lua
 ├── basic.lua
 ├── cmp
-│   └── cmp.lua
+│   ├── cmp.lua
+│   └── snippets
+│       ├── lua
+│       └── vscode
 ├── colorscheme.lua
-├── init.lua
+├── commConf.lua
+├── dap
+│   └── nvim-dap
+│       ├── config
+│       │   ├── codelldb.lua
+│       │   ├── cpptools.lua
+│       │   └── nodejs.lua
+│       └── setup.lua
 ├── keybindingAlias.lua
 ├── keybindings.lua
 ├── lsp
 │   ├── common-config.lua
 │   ├── config
 │   │   ├── bash.lua
+│   │   ├── clangd.lua
+│   │   ├── css.lua
+│   │   ├── emmet-ls.lua
+│   │   ├── gopls.lua
+│   │   ├── html.lua
+│   │   ├── json.lua
+│   │   ├── lua.lua
 │   │   ├── pyright.lua
-│   │   └── sqls.lua
+│   │   ├── quick-lint-js.lua
+│   │   ├── sqls.lua
+│   │   ├── tsserver.lua
+│   │   └── vimls.lua
+│   ├── lsp-signature.lua
 │   ├── null-ls.lua
 │   ├── setup.lua
-│   └── ui.lua
+│   ├── ui.lua
+│   └── vim-illuminate.lua
 ├── plugin-config
 │   ├── bufferline.lua
 │   ├── comment.lua
 │   ├── dashboard.lua
 │   ├── fidget.lua
 │   ├── gitsigns.lua
+│   ├── hop.lua
 │   ├── indent-blankline.lua
 │   ├── lualine.lua
+│   ├── markdown-preview.lua
+│   ├── mkdnflow.lua
 │   ├── neoscrolL.lua
 │   ├── nvim-autopairs.lua
+│   ├── nvim-colorizer.lua
+│   ├── nvim-notify.lua
 │   ├── nvim-tree.lua
 │   ├── nvim-treesitter.lua
 │   ├── project.lua
@@ -238,28 +288,32 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 │   ├── todo-comments.lua
 │   ├── toggleterm.lua
 │   ├── trouble.lua
+│   ├── twilight.lua
+│   ├── whichkey.lua
 │   ├── yanky.lua
 │   └── zen-mode.lua
-└── project.md
+├── plugins.lua
+├── start42.lua
+└── usercmd.lua
 ```
 
-**autocmd.lua**为定义的一些vim autocmd比如在yank的时候高亮yank的内容，对指定文件保存时进行格式化处理，**basic.lua**为对neovim一些基本编辑属性的配置，比如定义2个空格等于一个tab，**cmp**目录里的配置文件为neovim写代码时自动补全配置。
+**autocmd.lua**为定义的一些vim autocmd比如在yank的时候高亮yank的内容，对指定文件保存时进行格式化处理，**basic.lua**为对neovim一些基本编辑属性的配置，比如定义2个空格等于一个tab，**cmp**目录里的配置文件为neovim写代码时自动补全配置,**lsp**为lsp相关配置，**dap** 为调试器相关配置，**commConf** 文件定义一些公共的配置，比如是否要展示list char（控制字符），是否启动magic search等，**start42.lua** 文件为初始文件，sysinit.vim文件拉起start42.lua，start42.lua拉起后续配置文件。
 
 **neovim 代码补全**
 
-![neovim 代码补全](./picture/neovim1.png)
+![neovim 代码补全](./picture/cmp.png)
 
 **colorscheme.lua**定义了neovim的主题，配色，**dap**目录里的文件为neovim代码调试器相关配置。
 
 **neovim 调试代码**
 
-![neovim调试代码](./picture/2.png)
+![neovim调试代码](./picture/dap.png)
 
 **init.lua**为初始化配置文件，即sysinit.vim拉起init.lua，init.lua拉起后续的配置文件，**keybindings.lua**定义neovim一些键位映射，**lsp**目录下的配置文件为neovim LSP相关配置，neovim LSP包括neovim的一些代码定义跳转，引用跳转，代码提示等。
 
 **neovim—LSP**
 
-![neovim-LSP](./picture/3.png)
+![neovim-LSP](./picture/lsp.png)
 
 **plugin-config**目录下的文件为各种插件的配置文件。
 
@@ -270,6 +324,8 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
    *定义neovim的Leader键为`;`,leader键是什么，详细可以参考`:h <Leader>`*
 
    *可以通过修改**keybindingAlias.lua**文件定义自己的键位映射*
+
+   *配置定义的所有键位映射可以通过修改**keybindings.lua** 和**keybindingAlias.lua** 文件进行修改*
 
    - normal模式下键位映射
 
@@ -311,6 +367,8 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
      `Y` 将内容复制到系统剪切板(非neovim剪切板)
 
+     `F1` 进入command模式
+
    - command模式下键位映射
 
      `ctrl-j` `ctrl-k` 在命令补全窗口中向上移动向下移动
@@ -325,21 +383,23 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
      `s←` ，`s→`，`s↑` ，`s↓` 上下左右切换window
 
+     `F1` 进入command模式
+
 2. **插件键位映射**
 
    *插件键位一般是在normal模式下*
 
    - nvimTree
 
-     `<space>f` 打开|关闭 nvimTree
+     `<space>1` 打开|关闭 nvimTree
 
    - LSP
 
-     `rn` 重命名变量
+     `;rn`，`;ra` 重命名变量
 
-     `ca` 打开LSP行为
+     `;ca` code action
 
-     `gd` 跳转至定义，`gh` 打开文档，`gr` 跳转至引用，`gj` ，`gk` 跳转至上一个语法检查，跳转至下一个语法检查，`gl` 打开语法检查列表，`<Leader>f` 格式化代码。
+     `gd` 跳转至定义，`gh` 打开文档，`gr` 跳转至引用，`g←` ，`g→` 跳转至上一个语法检查，跳转至下一个语法检查，`gl` 打开语法检查列表，`;gl` goto type definitions, `;gi` goto implementations，`;gh` open signature-help，`<Leader>f` 格式化代码，`<space>3` open code outline
 
    - DAP
 
@@ -351,15 +411,27 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
    - telescope
 
-     normal模式和insert模式下 `ctrl-f` 在当前buffer中查找内容。
+     normal模式和insert模式下 `ctrl-f` 在当前buffer中查找内容，`<space>4` 查找项目文件，`<space>5` 打开buffer列表，`<space>s` 打开会话列表。
 
    - cmp
 
-     `<Tab>` ，`shift<Tab>`，`ctrl-k` ，`ctrl-j`  自动补全框向上选择，向下选择，`<CR>` 选中，`ctrl-u`，`ctrl-d` 自动补全扩展窗口向下移动，向上移动，`ctrl-<Space>` 打开自动补全，`<Space>e` 关闭自动补全。
+     `<Tab>` ，`shift<Tab>`（代码snippet节点上下跳转），`ctrl-k` ，`ctrl-j`（代码snippet条件节点上下选择）  自动补全框向上选择，向下选择，`<CR>` 选中，`ctrl-u`，`ctrl-d` 自动补全扩展窗口向下移动，向上移动，`ctrl-<Space>` 打开自动补全，`<Leader>ee` 关闭自动补全。
 
    - toggerterm
 
      `<Leader>ta` 打开|关闭 终端，`<Leader>tb` 打开|关闭 终端，`<Leader>tc` 打开|关闭 终端 `<Leader>td` 打开关闭特色终端[lazygit](https://github.com/jesseduffield/lazygit) 需要安装**lazygit**
+
+   - copilot
+
+     `<Leader>cc` 接受copilot的建议，配置默认关闭了copilot，需要的自行启用
+
+   - hop
+
+     `<Leader>gg` `<Leader>gv` normal和insert模式下打开行跳转和word跳转，`<Leader>gb` insert模式下打开 pattern
+
+   - yanky
+
+     `<Leader>yy` insert和normal模式打开yanky面板（剪切板历史）
 
    - gitsigns
 
@@ -549,7 +621,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
    - `:TroubleToggle [mode]`: toggle the list
    - `:TroubleRefresh`: manually refresh the active list
 
-   `mode = "workspace_diagnostics"|"workspace_diagnostics"|"document_diagnostics", "quickfix"|"lsp_references"|"loclist"`
+   **mode** = `"workspace_diagnostics"|"workspace_diagnostics"|"document_diagnostics", "quickfix"|"lsp_references"|"loclist"`
 
    trouble窗口默认键位映射
 
@@ -596,11 +668,15 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
     `:CmpStatus` 查看cmp加载状态
 
+    默认加载了tabnine，不加载copilot（请自行启用）
+
 12. yanky
 
     yanky: <https://github.com/gbprod/yanky.nvim>
 
     常用的yanky插件命令
+
+    `:YankyClearHistory` 清空剪切板历史
 
     `:Telescope yank_history` 打开neovim剪切板历史
 
@@ -673,7 +749,7 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
     `<CR>` 创建链接 `md` 删除链接 `ya` `yfa` 给一个标题创建anchor link `<TAB>` `<S-TAB>` 上下跳转链接 `[[` `]]` 上下跳转标题 `+` `-` 增加标题层级
 
-    下面gif动图展示上述便捷操作unordered list
+    下面gif动图展示上述便捷操作
 
     ![一些markdown便捷操作](./picture/2.gif)
 
@@ -682,15 +758,17 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
     **一些键位映射**
 
     ```plain
-     mkdnflow = {
-       enable = true,
-       mkdnDestroyLink = "md",
-       mkdnTagSpan = "md",
-       mkdnTablePrevRow = "<C-CR>",
-       mkdnToggleToDo = "mt",
-       mkdnFoldSection = "mz",
-       mkdnUnfoldSection = "<leader>mz",
-    },
+    mkdnflow = {
+        enable = true,
+        mkdnDestroyLink = "md",
+        mkdnTagSpan = "md",
+        mkdnTablePrevRow = "<C-CR>",
+        mkdnToggleToDo = "mt",
+        mkdnFoldSection = "mz",
+        mkdnUnfoldSection = "<leader>mz",
+        mkdnTableNextCell = "<Leader>mj",
+        mkdnTablePrevCell = "<Leader>mk",
+    }
     ```
 
 15. markdown-preview
@@ -704,3 +782,63 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
     `:MarkdownPreviewStop` 关掉markdown-preview
 
     ![markdown preview](./picture/10.png)
+
+16. hop
+
+    hop: <https://github.com/phaazon/hop.nvim>
+
+    常用的hop命令
+
+    `:HopWord` 单词跳转
+
+    `:HopLine` 行跳转
+
+    `:HopAnywhere` 任意位置跳转
+
+    `:HopPattern` 打开模式匹配
+
+17. colorize
+
+    colorize: <https://github.com/norcalli/nvim-colorizer.lua>
+
+    常用的colorize命令
+
+    `:ColorizerToggle` 开关colorize
+
+18. tabnine 和 copilot
+
+    tabnine: <https://github.com/tzachar/cmp-tabnine>
+
+    copilot: <https://github.com/github/copilot.vim>
+
+19. matchup
+
+    matchup: <https://github.com/andymass/vim-matchup>
+
+    常用的matchup命令
+
+    `:MatchupReload` 插件重启
+
+    `:MatchupWhereAmI?` 我的位置
+
+20. whichkey
+
+    whichkey: <https://github.com/folke/which-key.nvim>
+
+21. color manager
+
+    color manager: <https://github.com/HUAHUAI23/telescope-color.nvim>
+
+    常用命令
+
+    `:Telescope i42 color23` 主题选择
+
+22. session manager
+
+    session manager: <https://github.com/HUAHUAI23/telescope-session.nvim>
+
+    常用命令
+
+    `:Telescope xray23 list` 会话列表
+
+    `:Telescope xray23 save` 会话保存

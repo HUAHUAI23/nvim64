@@ -77,7 +77,7 @@ https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-
 
 ### 我的neovim可以做什么
 
-我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go, vim的LSP，代码调试功能配置了python, c, nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览。
+我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go, vim的LSP，代码调试功能配置了python, c, nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览，**对于大文件的优化**，当文件很大时，默认关闭了treesitter语法高亮，和一些插件，提高大文件的打开速度。
 
 #### 我的neovim首页
 

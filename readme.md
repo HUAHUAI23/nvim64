@@ -85,7 +85,7 @@ https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-
 
 配置有三个配色，可以通过颜色插件进行选择 **`Telescope i42 color23`**
 
-对于终端背景与nvim有差距层次问题可以通过让终端背景色与nvim背景色一致解决 主题**背景色** `#2C323B` nvim主题背景高亮组 **`Normal` `NormalNC` `NormalFloat`**
+对于终端背景与nvim有差距层次问题可以通过让终端背景色与nvim背景色一致解决 主题**背景色** `#2C323B` nvim主题背景高亮组 **`Normal` `NormalNC` `NormalFloat`**，对于**Syntax**相关的内容，比如函数粗体显示，注释斜体显示，需终端开启相应的支持，我用的是**windows terminal +wsl2**环境
 
 ![color manager](./picture/colormanager.png)
 

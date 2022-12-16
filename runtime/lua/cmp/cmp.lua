@@ -10,6 +10,18 @@ if not status then
 	vim.notify("没有找到 luasnip")
 	return
 end
+-- UI
+local types = require("luasnip.util.types")
+-- add icons for choice node
+luasnip.config.set_config({
+	ext_opts = {
+		[types.choiceNode] = {
+			active = {
+				virt_text = { { "●", "DiagnosticError" } },
+			},
+		},
+	},
+})
 
 local mapping = require("keybindings").pluginKeys.cmp(luasnip, cmp)
 local keybindingAlias = require("keybindingAlias")
@@ -224,7 +236,7 @@ local config_path = require("commConf").sharePath
 
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
 -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/abc/cmp/snippets/vscode" } })
-require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/abc/cmp/snippets/lua" } })
+require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/xray23/lua/cmp/snippets/lua" } })
 
 -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
 -- { "i", "s" } Indicates insertion mode and selection mode, respectively

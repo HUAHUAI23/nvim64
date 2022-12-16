@@ -12,6 +12,7 @@ local function join_paths(...)
 	local result = table.concat({ ... }, path_sep)
 	return result
 end
+
 local sharePath = require("commConf").sharePath
 local packer_dir = sharePath .. "/abc/packeeeee"
 vim.cmd("set packpath=" .. join_paths(packer_dir, "nvim", "site"))
@@ -313,6 +314,10 @@ return require("packer").startup({
 		use({ "nvim-telescope/telescope-project.nvim" })
 		-- telesocpe-dap
 		use("nvim-telescope/telescope-dap.nvim")
+		-- telesope http
+		use({ "barrett-ruth/telescope-http.nvim" })
+		-- telesocpe-dapzzzz
+		use("HUAHUAI23/telescope-dapzzzz")
 		-- telescope-session
 		use("HUAHUAI23/telescope-session.nvim")
 		-- telescope-color

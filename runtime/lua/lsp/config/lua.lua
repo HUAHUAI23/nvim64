@@ -34,7 +34,7 @@ local opts = {
 	capabilities = require("lsp.common-config").capabilities,
 	on_attach = function(client, bufnr)
 		local lspComm = require("lsp.common-config")
-		lspComm.keyAttach(bufnr)
+		-- lspComm.keyAttach(bufnr)
 		-- lspComm.disableFormat(client)
 		-- lspComm.shwLinDiaAtom(bufnr)
 		lspComm.navic.attach(client, bufnr)

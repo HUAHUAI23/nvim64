@@ -62,9 +62,11 @@ local sources = {
 		end,
 	}),
 	-- diagnostics.pylint,  -- lsp_server pyright
+	diagnostics.jsonlint,
 	diagnostics.shellcheck,
 	diagnostics.markdownlint.with({
 		method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+		extra_args = { "--config", commConf.markdownlintConfig },
 	}),
 
 	--Hover

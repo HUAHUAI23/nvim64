@@ -4,6 +4,26 @@ if not status then
 	return
 end
 
+local commConf = require("commConf")
+local previewers = require("telescope.previewers")
+local putils = require("telescope.previewers.utils")
+local pfiletype = require("plenary.filetype")
+local new_maker = function(filepath, bufnr, opts)
+	opts = opts or {}
+	if opts.use_ft_detect == nil then
+		opts.use_ft_detect = true
+	end
+
+	filepath = vim.fn.expand(filepath)
+	local ft = pfiletype.detect(filepath, {})
+	local ok, stats = pcall(vim.loop.fs_stat, filepath)
+	if ok and stats and stats.size > commConf.largefileEdge then
+		opts.use_ft_detect = false
+		putils.regex_highlighter(bufnr, ft)
+	end
+	previewers.buffer_previewer_maker(filepath, bufnr, opts)
+end
+
 telescope.setup({
 	defaults = {
 		prompt_prefix = "🔍",
@@ -15,6 +35,7 @@ telescope.setup({
 				["q"] = "close",
 			},
 		},
+		buffer_previewer_maker = new_maker,
 	},
 	extensions = {
 		fzf = {
@@ -32,10 +53,14 @@ telescope.setup({
 pcall(telescope.load_extension, "fzf")
 -- extension telescope-env.nvim
 pcall(telescope.load_extension, "env")
+-- extension telescope-http.nvim
+pcall(telescope.load_extension, "http")
 -- extension telescope-project
 pcall(telescope.load_extension, "projects")
 -- extension telescope-dap
 pcall(telescope.load_extension, "dap")
+-- extension telescope-dapzzzz
+pcall(telescope.load_extension, "i23")
 -- extension telescope-session
 pcall(telescope.load_extension, "xray23")
 -- extension telescope-color

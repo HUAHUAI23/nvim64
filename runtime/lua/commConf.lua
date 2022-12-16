@@ -15,6 +15,10 @@ commconf.sharePath = vim.env.VIM
 -- basic config
 commconf.listchar = true
 
+-- lint    null-ls
+-- https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+commconf.markdownlintConfig = vim.fn.expand(commconf.sharePath .. "/xray23/lint-globals/.markdownlint.jsonc")
+
 function commconf.magiceSearchSwitches(opts)
 	if opts.vmagicSearch == "on" then
 		vim.api.nvim_set_keymap("v", "/", "/\\v", { noremap = true, silent = false })

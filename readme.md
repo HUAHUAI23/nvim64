@@ -77,7 +77,7 @@ https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-
 
 ### 我的neovim可以做什么
 
-我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go, vim的LSP，代码调试功能配置了python, c, nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览。
+我的neovim配置了c，python，nodejs，lua，bash，ts，sql，go, vim的LSP，代码调试功能配置了python, c, nodejs，配置了markdown相关插件，方便markdown文件编辑和markdown文件预览，**对于大文件的优化**，当文件很大时，默认关闭了treesitter语法高亮，和一些插件，提高大文件的打开速度。
 
 #### 我的neovim首页
 
@@ -85,11 +85,11 @@ https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-
 
 配置有三个配色，可以通过颜色插件进行选择 **`Telescope i42 color23`**
 
-对于终端背景与nvim有差距层次问题可以通过让终端背景色与nvim背景色一致解决 **背景色** `#2C323B` nvim 背景高亮组 **`Normal` `NormalNC` `NormalFloat`**
+对于终端背景与nvim有差距层次问题可以通过让终端背景色与nvim背景色一致解决 主题**背景色** `#2C323B` nvim主题背景高亮组 **`Normal` `NormalNC` `NormalFloat`**，对于**Syntax**相关的内容，比如函数粗体显示，注释斜体显示，需终端开启相应的支持，我用的是**windows terminal +wsl2**环境
 
 ![color manager](./picture/colormanager.png)
 
-**deus** <https://github.com/theniceboy/nvim-deus>
+**deus** <https://github.com/ajmwagar/vim-deus>
 
 ![deus](./picture/deus.png)
 

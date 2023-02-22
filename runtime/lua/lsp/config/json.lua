@@ -12,7 +12,9 @@ local opts = {
 	handlers = require("lsp.common-config").handlers,
 	settings = {
 		json = {
+			-- see https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#use-json-schemas-from-schemastore
 			schemas = require("schemastore").json.schemas(),
+			validate = { enable = true },
 		},
 	},
 }

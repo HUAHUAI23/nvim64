@@ -2,12 +2,12 @@ local root_files = {
 	"project.md",
 }
 local util = require("lspconfig.util")
+local lspComm = require("lsp.common-config")
 return {
 	on_setup = function(server)
 		server.setup({
 			capabilities = require("lsp.common-config").capabilities,
 			on_attach = function(client, bufnr)
-				local lspComm = require("lsp.common-config")
 				-- lspComm.keyAttach(bufnr)
 				lspComm.navic.attach(client, bufnr)
 				-- lspComm.shwLinDiaAtom(bufnr)

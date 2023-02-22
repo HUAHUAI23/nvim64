@@ -18,6 +18,7 @@ bufferline.setup({
 		-- },
 		-- color_icons = false,
 		diagnostics = "nvim_lsp",
+		---@diagnostic disable-next-line: unused-local
 		diagnostics_indicator = function(count, level, diagnostics_dict, context)
 			-- -- current buffer don't show LSP indicators
 			-- if context.buffer:current() then
@@ -45,6 +46,11 @@ bufferline.setup({
 				text_align = "right",
 			},
 			{
+				filetype = "Outline",
+				text = "👾outline",
+				text_align = "right",
+			},
+			{
 				filetype = "undotree",
 				text = "👾undo Tree",
 				text_align = "left",
@@ -64,3 +70,5 @@ bufferline.setup({
 		-- },
 	},
 })
+-- bufferline will override showtabline to 2
+-- vim.o.showtabline = 0

@@ -17,9 +17,26 @@ if not status then
 	return
 end
 
+-- see https://github.com/folke/neodev.nvim
+-- settings for neovim dev environment
+local neodev
+status, neodev = pcall(require, "neodev")
+if not status then
+	---@diagnostic disable-next-line: param-type-mismatch
+	vim.notify("没有找到 neodev", "error")
+	return
+end
+neodev.setup({
+	library = {
+		enable = true,
+		plugins = { "nvim-dap-ui" },
+		types = true,
+	},
+})
+
 mason_lspconfig.setup({
 	ensure_installed = {
-		"sumneko_lua",
+		"lua_ls",
 		"bashls",
 		"pyright",
 		"tsserver",
@@ -37,57 +54,9 @@ if not status then
 	return
 end
 
--- local srvPairs = {
--- 	lua = "sumneko_lua",
--- 	luaConf = "lsp.config.lua",
--- 	bash = "bashls",
--- 	bashConf = "lsp.config.bash",
--- 	python = "pyright",
--- 	pythonConf = "lsp.config.pyright",
--- }
-
--- mason_lspconfig.setup_handlers({
--- 	-- The first entry (without a key) will be the default handler
--- 	-- and will be called for each installed server that doesn't have
--- 	-- a dedicated handler.
--- 	function(server_name) -- default handler (optional)
--- 		lspconfig[server_name].setup({})
--- 	end,
--- 	[srvPairs["lua"]] = function()
--- 		local status, config = pcall(require, srvPairs["luaConf"])
--- 		if status and type(config) == "table" then
--- 			-- 自定义初置文件必须实现on_setup 方法
--- 			config.on_setup(lspconfig[srvPairs["lua"]])
--- 		else
--- 			-- 使用默认参数
--- 			lspconfig[srvPairs["lua"]].setup({})
--- 		end
--- 	end,
--- 	[srvPairs["bash"]] = function()
--- 		local status, config = pcall(require, srvPairs["bashConf"])
--- 		if status and type(config) == "table" then
--- 			-- 自定义初置文件必须实现on_setup 方法
--- 			config.on_setup(lspconfig[srvPairs["bash"]])
--- 		else
--- 			-- 使用默认参数
--- 			lspconfig[srvPairs["bash"]].setup({})
--- 		end
--- 	end,
--- 	[srvPairs["python"]] = function()
--- 		local status, config = pcall(require, srvPairs["pythonConf"])
--- 		if status and type(config) == "table" then
--- 			-- 自定义初置文件必须实现on_setup 方法
--- 			config.on_setup(lspconfig[srvPairs["python"]])
--- 		else
--- 			-- 使用默认参数
--- 			lspconfig[srvPairs["python"]].setup({})
--- 		end
--- 	end,
--- })
-
 -- 使用neovim原生lspconfig进行language server配置
 local servers = {
-	sumneko_lua = require("lsp.config.lua"), -- lua/lsp/config/lua.lua
+	lua_ls = require("lsp.config.lua"), -- lua/lsp/config/lua.lua
 	bashls = require("lsp.config.bash"),
 	pyright = require("lsp.config.pyright"),
 	tsserver = require("lsp.config.tsserver"),

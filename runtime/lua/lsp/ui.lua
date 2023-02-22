@@ -33,10 +33,3 @@ end
 -- see more https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt
 require("lspconfig.ui.windows").default_options.border = "rounded"
 
--- lspsage offers some interesting stuff eg: outline floatterm
-local saga = require("lspsaga")
--- TODO:设置saga的高亮组
-saga.init_lsp_saga({
-	border_style = "rounded",
-	code_action_icon = "💡",
-})

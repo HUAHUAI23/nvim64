@@ -3,6 +3,7 @@ if not status then
 	vim.notify("没有找到 indent_blankline")
 	return
 end
+-- NOTE: anther configuration in lua/autocmd.lua
 indent_blankline.setup({
 	-- show_trailing_blankline_indent = true,
 	-- show_end_of_line = true,

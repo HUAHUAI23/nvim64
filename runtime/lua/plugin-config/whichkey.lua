@@ -15,7 +15,7 @@ whichkey.setup({
 		-- override the label used to display some keys. It doesn't effect WK in any other way.
 		-- For example:
 		["<space>"] = "SPC",
-		["<cr>"] = "RET",
+		["<cr>"] = "Enter",
 		["<tab>"] = "TAB",
 	},
 	triggers_blacklist = {
@@ -29,5 +29,13 @@ whichkey.setup({
 	disable = {
 		buftypes = {},
 		filetypes = { "TelescopePrompt" },
+	},
+})
+
+local wk = require("which-key")
+wk.register({
+	[require("keybindingAlias").telescope.session_load] = {
+		"<cmd>Telescope xray23 list<cr>",
+		"vim session list",
 	},
 })

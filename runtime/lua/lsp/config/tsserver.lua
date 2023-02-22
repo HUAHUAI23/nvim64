@@ -1,3 +1,5 @@
+-- local commConf = require("commConf")
+local lspComm = require("lsp.common-config")
 local root_files = {
 	"project.md",
 }
@@ -5,7 +7,6 @@ local util = require("lspconfig.util")
 local opts = {
 	capabilities = require("lsp.common-config").capabilities,
 	on_attach = function(client, bufnr)
-		local lspComm = require("lsp.common-config")
 		lspComm.keyAttach(bufnr)
 		lspComm.navic.attach(client, bufnr)
 		-- lspComm.shwLinDiaAtom(bufnr)

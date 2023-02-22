@@ -10,6 +10,7 @@ autopairs.setup({
 	-- Don't add pairs if the next char is in pattern "%w%%%'%[%"%."
 	ignored_next_char = [=[[%w%%%'%[%"%.]]=],
 	-- use treesitter to check for a pair
+	-- NOTE: in large file, the autopair will not be enable   lua/autocmd.lua
 	check_ts = true,
 	ts_config = {
 		-- 在lua字符串中将不会启用autopair

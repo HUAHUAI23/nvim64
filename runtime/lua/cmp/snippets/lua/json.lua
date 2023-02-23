@@ -1,5 +1,52 @@
 ---@diagnostic disable: undefined-global
+-- TODO: deus vscode snippet
 return {
+	-- use fmt
+	-- s("pydapconf", {
+	-- 	c(1, {
+	-- 		fmt(
+	-- 			[[
+	--    {
+	--      "configurations": [
+	--        {
+	--          <>
+	--        }
+	--      ],
+	--      "inputs": [
+	--        {
+	--          <>
+	--        }
+	--      ]
+	--    }
+	--    ]],
+	-- 			{
+	-- 				i(1, "conf_node"),
+	-- 				i(2, "input_node"),
+	-- 			},
+	-- 			{
+	-- 				delimiters = "<>",
+	-- 			}
+	-- 		),
+	-- 		fmt(
+	-- 			[[
+	--    {
+	--      "configurations": [
+	--        {
+	--          <>
+	--        }
+	--      ]
+	--    }
+	--    ]],
+	-- 			{
+	-- 				i(1, "conf_node"),
+	-- 			},
+	-- 			{
+	-- 				delimiters = "<>",
+	-- 			}
+	-- 		),
+	-- 	}),
+	-- }),
+	-- use sn
 	s({ trig = "pydapconf", dscr = "Python dap configuration" }, {
 		c(1, {
 			sn(nil, {

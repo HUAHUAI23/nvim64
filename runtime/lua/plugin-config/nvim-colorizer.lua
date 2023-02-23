@@ -6,9 +6,9 @@ end
 colorizer.setup({
 	"css",
 	"javascript",
-	lua = {
-		mode = "foreground",
-	},
+	-- lua = {
+	-- 	mode = "foreground",
+	-- },
 	html = {
 		mode = "foreground",
 	},

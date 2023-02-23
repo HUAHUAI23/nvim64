@@ -1,6 +1,7 @@
 local status, fidget = pcall(require, "fidget")
 if not status then
-	vim.notify("没有找到 fidget")
+	---@diagnostic disable-next-line: param-type-mismatch
+	vim.notify("没有找到 fidget", "error")
 	return
 end
 fidget.setup({

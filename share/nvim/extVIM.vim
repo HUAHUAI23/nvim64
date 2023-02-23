@@ -52,7 +52,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 set noequalalways
 
 if has("persistent_undo")
-    let target_path = expand('~/.undodir')
+    let target_path = expand($VIM . "/othersss/undodir/")
 
     " create the directory and any parent directories
     " if the location does not exist.

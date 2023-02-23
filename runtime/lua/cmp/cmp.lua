@@ -11,8 +11,8 @@ if not status then
 	return
 end
 -- UI
-local types = require("luasnip.util.types")
 -- add icons for choice node
+local types = require("luasnip.util.types")
 luasnip.config.set_config({
 	ext_opts = {
 		[types.choiceNode] = {
@@ -27,6 +27,8 @@ local mapping = require("keybindings").pluginKeys.cmp(luasnip, cmp)
 local keybindingAlias = require("keybindingAlias")
 
 local commConf = require("commConf")
+-- in large file not use treesitter
+-- TODO: add filetype check, not enable in specific filetype
 local ifEnable = function()
 	local context = require("cmp.config.context")
 	local max_filesize = commConf.largefileEdge -- 100 KB
@@ -91,6 +93,7 @@ local source_mapping = {
 
 --cmp config
 -- https://github.com/hrsh7th/nvim-cmp
+-- UI about cmp win
 local winhighlight = {
 	winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual",
 }
@@ -130,6 +133,7 @@ cmp.setup({
 					vim_item.kind = vim_item.kind .. " " .. "[ML]"
 				end
 			end
+			-- the maximum length of the menu item, if it's logger than this value, it will be truncated
 			local maxwidth = 80
 			vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
 			return vim_item
@@ -144,8 +148,10 @@ cmp.setup({
 		end,
 	},
 	window = {
+		-- floating window for completion menu
 		completion = cmp.config.window.bordered(winhighlight),
 		-- completion = cmp.config.window.bordered(),
+		-- floating window for documentation popup
 		documentation = cmp.config.window.bordered(winhighlight),
 	},
 	-- keybindings
@@ -155,6 +161,7 @@ cmp.setup({
 		{ name = "luasnip", group_index = 1 }, -- For luasnip users. If this is not set, LuaSnip's snippet will not be included in the completion list
 		-- tabnine
 		{ name = "cmp_tabnine", group_index = 1 },
+		-- lsp
 		{ name = "nvim_lsp", group_index = 1 },
 		{ name = "nvim_lsp_signature_help", group_index = 1 },
 		{
@@ -179,6 +186,7 @@ cmp.setup({
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
+		{ name = "nvim_lsp_document_symbol", group_index = 1 },
 		{
 			name = "buffer",
 			option = {
@@ -191,6 +199,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 					return { buf }
 				end,
 			},
+			group_index = 2,
 		},
 	},
 })
@@ -201,7 +210,6 @@ cmp.setup.cmdline({ "/", "?" }, {
     { name = 'cmdline' } 和group_index意思相同，上面的优先级越高，即path的优先级高于
 }                         cmdline，path源ok的话将优先匹配path
 --]]
-
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
@@ -222,9 +230,31 @@ cmp.setup.filetype({ "dap-repl", "dapui_watches" }, {
 	},
 })
 
--- disable cmp for specify filetype
+-- NOTE: disable cmp for specify filetype
 cmp.setup.filetype({ "TelescopePrompt", "text", "" }, {
 	enabled = false,
+})
+
+-- NOTE: set cmp for specify filetype
+cmp.setup.filetype({ "markdown" }, {
+	sources = {
+		{ name = "luasnip", group_index = 2 },
+		{
+			name = "buffer",
+			option = {
+				get_bufnrs = function()
+					local buf = vim.api.nvim_get_current_buf()
+					local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+					if byte_size > 1024 * 1024 then -- 1 Megabyte max
+						return {}
+					end
+					return { buf }
+				end,
+			},
+			group_index = 2,
+		},
+		{ name = "path", group_index = 1 },
+	},
 })
 
 -- ---LuaSnip configuration--------
@@ -232,10 +262,11 @@ cmp.setup.filetype({ "TelescopePrompt", "text", "" }, {
 -- custom snippets
 -- https://github.com/rafamadriz/friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
-local config_path = require("commConf").sharePath
+
+local config_path = commConf.sharePath
 
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
--- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/abc/cmp/snippets/vscode" } })
+-- require("luasnip.loaders.from_vscode").lazy_load({ paths = { config_path .. "/xray23/lua/cmp/snippets/vscode" } })
 require("luasnip.loaders.from_lua").load({ paths = { config_path .. "/xray23/lua/cmp/snippets/lua" } })
 
 -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
@@ -307,9 +338,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 -- github Copilot
--- ctrl x | xx
--- leader cc|ee
--- leader cv
+-- Alt j
 -- -- FIX: https://github.com/mfussenegger/nvim-dap/issues/562
 -- vim.api.nvim_set_var("copilot_filetypes", {
 -- 	["*"] = false,
@@ -327,9 +356,3 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- 	{ noremap = true, silent = true, expr = true, desc = "accept copilot suggestion" }
 -- )
 -- vim.g.copilot_no_tab_map = true
--- vim.api.nvim_set_keymap(
--- 	"i",
--- 	keybindingAlias.copilot.copilotPanel,
--- 	"<cmd>:Copilot panel<cr>",
--- 	{ noremap = true, silent = true, desc = "open copilot panel" }
--- )

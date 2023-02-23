@@ -73,7 +73,7 @@ python venv: `sudo apt install python3 python3-venv`
 
 **下面视频展示第一次安装我的neovim过程**
 
-https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-8f7d-5c3a831b3536.mp4
+<https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-8f7d-5c3a831b3536.mp4>
 
 ### 我的neovim可以做什么
 
@@ -85,13 +85,17 @@ https://user-images.githubusercontent.com/43649186/205034422-2c2df144-e568-485b-
 
 配置有三个配色，可以通过颜色插件进行选择 **`Telescope i42 color23`**
 
-对于终端背景与nvim有差距层次问题可以通过让终端背景色与nvim背景色一致解决 主题**背景色** `#2C323B` nvim主题背景高亮组 **`Normal` `NormalNC` `NormalFloat`**，对于**Syntax**相关的内容，比如函数粗体显示，注释斜体显示，需终端开启相应的支持，我用的是**windows terminal +wsl2**环境
+对于终端背景与 nvim 有差距层次问题可以通过让终端背景色与 nvim 背景色一致解决，主题**背景色** `#2C323B` nvim 主题背景高亮组 **`Normal` `NormalNC` `NormalFloat`**，对于 **Syntax** 相关的内容，比如函数粗体显示，注释斜体显示，需终端开启相应的支持，我用的是**windows terminal +wsl2**环境
 
 ![color manager](./picture/colormanager.png)
 
 **deus** <https://github.com/ajmwagar/vim-deus>
 
-![deus](./picture/deus.png)
+![deus](./picture/deus1.png)
+
+> deus 有四套语法高亮选择，`:DeusSyntaxColor`
+
+![deus2](./picture/deus2.png)
 
 **tundra** <https://github.com/sam4llis/nvim-tundra>
 
@@ -321,13 +325,13 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
 1. **基本键位映射**
 
-   *定义neovim的Leader键为`;`,leader键是什么，详细可以参考`:h <Leader>`*
+   *定义neovim的Leader键为空格键 `<SPACE>` ,leader 键是什么，详细可以参考`:h <Leader>`*
 
    *可以通过修改**keybindingAlias.lua**文件定义自己的键位映射*
 
    *配置定义的所有键位映射可以通过修改**keybindings.lua** 和**keybindingAlias.lua** 文件进行修改*
 
-   - normal模式下键位映射
+   - normal 模式下键位映射
 
      取消了normal模式下 `H` ，`L` ，`s` ，`<F1>` 键的默认功能。
 
@@ -357,8 +361,6 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
      `<F1>` 进入command模式
 
-     `<Leader><Leader>` 进入normal模式
-
      `<ctrl-/>` 行注释
 
    - visual模式下键位映射
@@ -379,31 +381,26 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
      normal模式下`stv` 垂直方向上打开终端window
 
-     `<Esc>` terminal模式回到normal模式
-
-     `s←` ，`s→`，`s↑` ，`s↓` 上下左右切换window
-
-     `F1` 进入command模式
-
 2. **插件键位映射**
 
    *插件键位一般是在normal模式下*
 
+   > **插件快捷键会经常出现变动，具体以文件 `keybindingAlias.lua` 为准**
    - nvimTree
 
      `<space>1` 打开|关闭 nvimTree
 
    - LSP
 
-     `;rn`，`;ra` 重命名变量
+     `<leader>rn`，`<leader>ra` 重命名变量
 
-     `;ca` code action
+     `<leader>ca` code action
 
      `gd` 跳转至定义，`gh` 打开文档，`gr` 跳转至引用，`g←` ，`g→` 跳转至上一个语法检查，跳转至下一个语法检查，`gl` 打开语法检查列表，`;gl` goto type definitions, `;gi` goto implementations，`;gh` open signature-help，`<Leader>f` 格式化代码，`<space>3` open code outline
 
    - DAP
 
-     `<F5>` 打开代码调试，`<F6>` 执行下一步，`<space>w` 关闭代码调试，`<space>T` 去掉所有中断点，`<space>t` 标记中断点，`<space>h` 光标处表达式求值，visual模式下 `<Leader><Leader>` 光标处表达式求值。
+     `<F5>` 打开代码调试，`<F6>` 执行下一步，`<space>de` 关闭代码调试，`<space>dT` 去掉所有中断点，`<space>dt` 标记中断点，`<space>dh` 光标处表达式求值，visual模式下 `<Leader>dh` 光标处表达式求值。
 
    - bufferline
 
@@ -415,15 +412,15 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
 
    - cmp
 
-     `<Tab>` ，`shift<Tab>`（代码snippet节点上下跳转），`ctrl-k` ，`ctrl-j`（代码snippet条件节点上下选择）  自动补全框向上选择，向下选择，`<CR>` 选中，`ctrl-u`，`ctrl-d` 自动补全扩展窗口向下移动，向上移动，`ctrl-<Space>` 打开自动补全，`<Leader>ee` 关闭自动补全。
+     `<Tab>` ，`shift<Tab>`（代码snippet节点上下跳转），`ctrl-k` ，`ctrl-j`（代码snippet条件节点上下选择）  自动补全框向上选择，向下选择，`<CR>` 选中，`ctrl-u`，`ctrl-d` 自动补全扩展窗口向下移动，向上移动，`ctrl-<Space>` 打开自动补全，`<Alt>k` 关闭自动补全。
 
    - toggerterm
 
-     `<Leader>ta` 打开|关闭 终端，`<Leader>tb` 打开|关闭 终端，`<Leader>tc` 打开|关闭 终端 `<Leader>td` 打开关闭特色终端[lazygit](https://github.com/jesseduffield/lazygit) 需要安装**lazygit**
+     `<Leader>ta` 打开|关闭 终端，`<Leader>tb` 打开|关闭 终端，`<Leader>tc` 打开|关闭 终端，`<Leader>td` 打开|关闭 终端`<Leader>tg` 打开关闭特色终端[lazygit](https://github.com/jesseduffield/lazygit) 需要安装**lazygit**
 
    - copilot
 
-     `<Leader>cc` 接受copilot的建议，配置默认关闭了copilot，需要的自行启用
+     `<alt>j` 接受copilot的建议，配置默认关闭了copilot，需要的自行启用
 
    - hop
 
@@ -842,3 +839,5 @@ neovim在启动阶段会加载目录 `$XDG_CONFIG_HOME/nvim` 下的init.vim文�
     `:Telescope xray23 list` 会话列表
 
     `:Telescope xray23 save` 会话保存
+23. translate
+    translate: <https://github.com/uga-rosa/translate.nvim>

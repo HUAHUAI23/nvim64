@@ -25,21 +25,19 @@ local sources = {
 	formatting.clang_format,
 	formatting.fixjson,
 	formatting.prettier.with({
-		disabled_filetypes = { "markdown", "javascript", "typescript" },
+		disabled_filetypes = { "markdown", "typescript" },
 		prefer_local = "node_modules/.bin",
-		-- milliseconds
-		-- NOTE: The maximum processing time of prettier,
-		-- if file size is very large,the maximum processing time should be more longer
-		timeout = 20000,
+		timeout = 30000,
 	}),
 	formatting.deno_fmt.with({
-		filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
-		timeout = 20000,
+		filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+		timeout = 30000,
 	}),
 	formatting.sql_formatter,
 	formatting.stylua,
-	formatting.markdownlint,
-
+	formatting.markdownlint.with({
+		timeout = 30000,
+	}),
 	-- Code action  eslint_d  shellcheck gitsigns(need https://github.com/lewis6991/gitsigns.nvim)
 	-- code_actions.shellcheck,
 	-- code_actions.eslint.with({
@@ -54,7 +52,9 @@ local sources = {
 		prefer_local = "node_modules/.bin",
 		method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
 		condition = function()
-			if api.nvim_buf_line_count(0) < commConf.lintLargefileEdge then
+			local max_filesize = commConf.largefileEdge -- 100 KB
+			local ok, stats = pcall(loop.fs_stat, api.nvim_buf_get_name(api.nvim_get_current_buf()))
+			if ok and stats and stats.size < max_filesize then
 				return true
 			else
 				return false
@@ -91,20 +91,18 @@ local function lsp_formatting(bufnr)
 	end
 end
 
+local lspKey = require("keybindingAlias").lsp
 null_ls.setup({
 	debug = false,
 	-- debounce = 250,
 	-- default_timeout = 5000,
-	-- NOTE: The null-ls's maximum waiting time,if the source processing time exceed this time,the source result will be discarded
-	-- null-ls will wait for results from the source util the maximum waiting time of null-ls,
-	-- if this time be exceeded and the source does not return a result,null-ls will return the default value
-	-- The null-ls's maximum waiting time should be greater than or equal to the maximum processing time of sources
-	default_timeout = 20000, -- 20 seconds
+	default_timeout = 31000, -- 31 seconds
 	-- #{m}: message  #{s}: source name (defaults to null-ls if not specified)  #{c}: code (if available)
 	-- diagnostics_format = "[#{c}] #{m} (#{s})",
 	diagnostics_format = "[#{s}] #{m}",
 	-- diagnostics_format = "#{m}",
 	sources = sources,
+	border = "rounded",
 	root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git", "project.md"),
 	on_attach = function(client, bufnr)
 		-- format document before save
@@ -119,12 +117,8 @@ null_ls.setup({
 				end,
 			})
 		end
-
-		local lspKey = require("keybindingAlias").lsp
-
 		-- TODO: fix markdown file
 		-- there are some lsp keymap the markdown file don't need
-
 		vim.keymap.set("n", lspKey.definition, function()
 			require("telescope.builtin").lsp_definitions(
 				require("telescope.themes").get_cursor({ initial_mode = "normal" })
@@ -135,6 +129,7 @@ null_ls.setup({
 				require("telescope.themes").get_cursor({ initial_mode = "normal" })
 			)
 		end, { noremap = true, silent = true, desc = "goto lsp references", buffer = bufnr })
+
 		vim.keymap.set(
 			"n",
 			lspKey.hover,
@@ -200,5 +195,11 @@ null_ls.setup({
 				require("telescope.themes").get_cursor({ initial_mode = "normal" })
 			)
 		end, { noremap = true, silent = true, desc = "goto type definition", buffer = bufnr })
+		vim.keymap.set(
+			"n",
+			lspKey.declaration,
+			vim.lsp.buf.declaration,
+			{ noremap = true, silent = true, desc = "goto declaration", buffer = bufnr }
+		)
 	end,
 })

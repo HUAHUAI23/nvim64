@@ -70,7 +70,7 @@ vim.o.swapfile = false
 -- also a wait time for the CursorHold event
 -- vim.o.updatetime = 1000 --1000
 -- 设置 timeoutlen 为等待键盘快捷键连击时间500毫秒，可根据需要设置,例如快捷键shift+q
--- map映射的组合键，输入一个键 最长等待时间500秒 等待下一个键输入
+-- map映射的组合键，输入一个键 最长等待时间500毫秒 等待下一个键输入
 -- 遇到问题详见：https://github.com/nshen/learn-neovim-lua/issues/1
 vim.o.timeoutlen = 500 --500
 
@@ -89,6 +89,7 @@ vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- vim.o.t_Co = 256
 
 -- 不可见字符的显示，这里只把空格显示为一个点
+-- vim.opt.listchars = {eol = '↲', tab = '▸ ', trail = '·'}
 vim.opt.list = require("commConf").listchar
 vim.o.listchars = "tab:··,trail:▫"
 vim.opt.listchars:append("space:⋅")
@@ -107,6 +108,7 @@ vim.o.pumheight = 10
 -- 永远显示 tabline
 -- tabline winbar statusbar
 vim.o.showtabline = 2
+-- vim.o.showtabline = 0
 
 -- 使用增强状态栏插件后不再需要 vim 的模式提示
 vim.o.showmode = false

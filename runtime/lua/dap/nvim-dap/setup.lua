@@ -4,25 +4,26 @@ require("nvim-dap-virtual-text").setup({})
 dapui.setup({
 	-- Expand lines larger than the window
 	-- Requires >= 0.7
-	expand_lines = vim.fn.has("nvim-0.7") == 1,
+	-- expand_lines = vim.fn.has("nvim-0.7") == 1,
+	expand_lines = false,
 	layouts = {
-		{
-			elements = {
-				-- Elements can be strings or table with id and size keys.
-				{ id = "scopes", size = 0.25 },
-				"breakpoints",
-				"stacks",
-				"watches",
-			},
-			size = 30, -- 30 columns
-			position = "right",
-		},
+		-- {
+		-- 	elements = {
+		-- 		-- Elements can be strings or table with id and size keys.
+		-- 		{ id = "scopes", size = 0.25 },
+		-- 		"breakpoints",
+		-- 		"stacks",
+		-- 		"watches",
+		-- 	},
+		-- 	size = 30, -- 30 columns
+		-- 	position = "right",
+		-- },
 		{
 			elements = {
 				"repl",
 				"console",
 			},
-			size = 0.25, -- 25% of total lines
+			size = 0.3, -- 25% of total lines
 			position = "bottom",
 		},
 	},
@@ -37,6 +38,7 @@ dapui.setup({
 -- https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt *dap-extensions*  *dap.repl.open()*   *dap-api*
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open({ reset = true })
+	vim.cmd("stopinsert")
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
 	dapui.close({})
@@ -98,6 +100,7 @@ end
 -- js
 -- dap.adapters.node2 = dap_config.nodejs.adapter
 -- dap.configurations.javascript = dap_config.nodejs.configuration
+
 local sharePath = require("commConf").sharePath
 -- python
 require("dap-python").setup(sharePath .. "/abc/mason/packages/debugpy/venv/bin/python")

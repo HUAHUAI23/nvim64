@@ -1,0 +1,156 @@
+-- s snippet
+-- t text node
+-- i insert node
+-- c choice node
+-- sn snippetNode
+-- d dynamic node
+-- f function node
+-- fmt format node
+-- https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md#lua
+
+---@diagnostic disable: undefined-global
+
+local function fn(
+	args, -- text from i(2) and i(1) in this example
+	parent, -- parent snippet or parent node
+	user_args -- user_args from opts.user_args
+)
+	--  args {{"line1"},{"line1", "line2", "line3"}}
+	print(vim.inspect(args))
+	return "[" .. args[1][1] .. " " .. user_args .. "]"
+end
+
+return {
+	-- text node use table to display multiple lines
+	s(
+		"examplenode",
+		{ i(0), t("the example snippet  "), i(1, "index1"), t({ "  multiple", "lines  " }), i(2, "index2") }
+	),
+	s(
+		{ trig = "examplechoices", dscr = { "ffff", "uuu" } },
+		{ c(1, { t({ "choice1", "the second line" }), t("choice 2"), t("choice 3") }) }
+	),
+	-- fun node will return a text
+	s("examplefun", {
+		i(1),
+		t(" <-i(1) "),
+		f(
+			fn, -- callback (args, parent, user_args) -> string
+			{ 2, 1 }, -- node indice(s) whose text is passed to fn, i.e. i(2) and i(1)
+			{ user_args = { "user_args_value" } } -- opts
+		),
+		t(" i(2)->"),
+		i(2),
+		t(" <-i(2) i(0)->"),
+		-- 0 the end index and the 1 is start index
+		i(0),
+	}),
+	s(
+		"examplefmt",
+		fmt(
+			[[
+  if {} then
+    {}
+  end
+  ]],
+			{
+				-- i(1) is at nodes[1], i(2) at nodes[2].
+				i(1, "not now"),
+				i(2, "when"),
+			}
+		)
+	),
+	s("examplefmt2", {
+		c(1, {
+			fmt(
+				[[
+	   {
+	     "configurations": [
+	       {
+	         <>
+	       }
+	     ],
+	     "inputs": [
+	       {
+	         <>
+	       }
+	     ]
+	   }
+	   ]],
+				{
+					i(1, "conf_node"),
+					i(2, "input_node"),
+				},
+				{
+					delimiters = "<>",
+				}
+			),
+			fmt(
+				[[
+	   {
+	     "configurations": [
+	       {
+	         <>
+	       }
+	     ]
+	   }
+	   ]],
+				{
+					i(1, "conf_node"),
+				},
+				{
+					delimiters = "<>",
+				}
+			),
+		}),
+	}),
+	s({ trig = "examplesn", dscr = "Python dap configuration" }, {
+		c(1, {
+			-- nil, it inherited from c
+			sn(nil, {
+				-- jump-indices are local to each snippetNode, so restart at 1.
+				i(1), -- if in the choice node, the first snippetNode's children node must be i(1)
+				t({ "{", [[  "configurations": []], "    " }),
+				i(2, "conf"),
+				t({ [[]], "  ]", "}" }),
+			}),
+			-- nil, it inherited from c
+			sn(nil, {
+				i(1),
+				t({ "{", [[  "configurations": []], "    " }),
+				i(2, "conf"),
+				t({ [[]], "  ],", [[  "inputs": []], "    " }),
+				i(3, "input_node"),
+				t({ [[]], "  ]", "}" }),
+			}),
+		}),
+	}),
+	s({ trig = "exampledy", dscr = "dap input node" }, {
+		t({ "{", [[  "id": "]] }),
+		i(1, "ID"),
+		t({ [[",]], [[  "type": "]] }),
+		c(2, { t("promptString"), t("pickString") }),
+		t({ [[",]], [[  "description": "]] }),
+		i(3, "description"),
+		t({ [[",]], [[  "default": "]] }),
+		i(4, "default"),
+		d(5, function(args)
+			-- the returned snippetNode doesn't need a position; it's inserted
+			-- "inside" the dynamicNode.
+			print(vim.inspect(args))
+			if args[1][1] == "pickString" then
+				return sn(nil, {
+					-- jump-indices are local to each snippetNode, so restart at 1.
+					t({ [[",]], [[  "options": "]] }),
+					i(1, "options:Array"),
+					t({ [["]], [[}]] }),
+				})
+			else
+				return sn(nil, {
+					t({ [["]], [[}]] }),
+				})
+			end
+		end, { 2 }),
+		i(0),
+	}),
+}

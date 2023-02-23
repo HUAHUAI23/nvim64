@@ -15,6 +15,7 @@ cp -R "${iniDir}"/share/nvim/* "${iniDir}"/nvim-linux64/share/nvim/
 
 mkdir -p "${iniDir}"/nvim-linux64/share/nvim/abc/cmp/snippets/{lua,vscode}
 mkdir -p "${iniDir}"/nvim-linux64/share/nvim/xray23
+mkdir -p "${iniDir}"/nvim-linux64/share/nvim/othersss
 
 cp -R "${iniDir}"/runtime/* "${iniDir}"/nvim-linux64/share/nvim/xray23
 # mv "${iniDir}"/nvim-linux64/share/nvim/xray23/init.lua "${iniDir}"/nvim-linux64/bin

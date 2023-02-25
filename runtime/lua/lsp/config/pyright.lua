@@ -16,6 +16,13 @@ local opts = {
 		lspComm.navic.attach(client, bufnr)
 		vim.opt_local.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 		-- lspComm.hlSymUdrCursor(client, bufnr)
+		vim.api.nvim_buf_create_user_command(bufnr, "PyleftFixImport", function()
+			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+		end, {
+			desc = "Fix Pyleft import problem",
+			nargs = 0,
+		})
+
 		-- large file hundler
 		-- local max_filesize = commConf.largefileEdge -- 100 KB
 		-- local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(bufnr))
@@ -27,12 +34,20 @@ local opts = {
 	root_dir = function(fname)
 		return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
 	end,
+	settings = {
+		python = {
+			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "workspace",
+				useLibraryCodeForTypes = true,
+			},
+		},
+	},
 	-- on_new_config = function(new_config, new_root_dir)
 	-- 	new_config.autostart = false
 	-- 	-- vim.pretty_print(new_config)
 	-- end,
 }
-
 return {
 	on_setup = function(server)
 		server.setup(opts)

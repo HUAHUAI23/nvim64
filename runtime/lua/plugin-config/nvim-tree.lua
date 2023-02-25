@@ -27,6 +27,36 @@ nvim_tree.setup({
 		enable = true,
 		update_root = true,
 	},
+	renderer = {
+		indent_markers = {
+			enable = false,
+			inline_arrows = true,
+			icons = {
+				corner = "└",
+				edge = "│",
+				item = "│",
+				bottom = "─",
+				none = " ",
+			},
+		},
+		-- 🔭 🚆 🚧 🪵 🗑️ 🗄️ 🗞️ 🧵 📇 📡 🔎 👣 🏷️ 📑 📐
+		icons = {
+			webdev_colors = true,
+			padding = " ",
+			symlink_arrow = " ➛ ",
+			glyphs = {
+				git = {
+					unstaged = "❌",
+					staged = "💯",
+					unmerged = "🪵",
+					renamed = "📐",
+					untracked = "📑",
+					deleted = "🗑️",
+					ignored = "👀",
+				},
+			},
+		},
+	},
 	-- -------
 	diagnostics = {
 		enable = ifEnable,

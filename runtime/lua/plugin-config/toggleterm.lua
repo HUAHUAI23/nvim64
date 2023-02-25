@@ -21,6 +21,9 @@ toggleterm.setup({
 		FloatBorder = {
 			link = "FloatBorder",
 		},
+		NormalFloat = {
+			link = "Normal",
+		},
 	},
 })
 

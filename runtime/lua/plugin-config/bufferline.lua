@@ -14,8 +14,10 @@ bufferline.setup({
 		end,
 		-- numbers = "buffer_id",
 		-- indicator = {
-		-- 	style = "icon",
+		-- 	icon = "▎", -- this should be omitted if indicator style is not 'icon'
+		-- 	style = "icon" | "underline" | "none",
 		-- },
+		separator_style = "thin",
 		-- color_icons = false,
 		diagnostics = "nvim_lsp",
 		---@diagnostic disable-next-line: unused-local
@@ -36,23 +38,28 @@ bufferline.setup({
 		offsets = {
 			{
 				filetype = "NvimTree",
-				text = "File Explorer🗂️",
-				highlight = "Directory",
+				-- 🧶 🧵 💯 🗒︎ 🗓️
+				text = "🗂️ File Explorer",
+				highlight = "BufferlineCustomeNvimtree",
 				text_align = "left",
+				separator = true,
 			},
 			{
 				filetype = "lspsagaoutline",
-				text = "👾outline",
+				text = "🧵 outline",
+				highlight = "BufferlineCustomeNvimtree",
 				text_align = "right",
 			},
 			{
 				filetype = "Outline",
-				text = "👾outline",
+				highlight = "BufferlineCustomeNvimtree",
+				text = "💯 outline",
 				text_align = "right",
 			},
 			{
 				filetype = "undotree",
-				text = "👾undo Tree",
+				highlight = "BufferlineCustomeNvimtree",
+				text = "🧶 undo Tree",
 				text_align = "left",
 			},
 		},

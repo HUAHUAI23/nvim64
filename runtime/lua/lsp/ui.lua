@@ -3,7 +3,7 @@
 -- see ：h diagnostic.txt     398gg
 vim.diagnostic.config({
 	-- 🔬 🔮
-	virtual_text = { source = "always", prefix = "🔬" },
+	virtual_text = { source = "always", prefix = "🔍️" },
 	signs = true,
 	update_in_insert = false,
 	float = {
@@ -32,4 +32,3 @@ end
 -- and you can use following configuration
 -- see more https://github.com/neovim/nvim-lspconfig/blob/master/doc/lspconfig.txt
 require("lspconfig.ui.windows").default_options.border = "rounded"
-

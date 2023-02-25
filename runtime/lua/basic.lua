@@ -11,9 +11,15 @@ vim.wo.number = true
 vim.wo.relativenumber = false
 -- 高亮所在行
 vim.wo.cursorline = true
--- 显示左侧图标指示列
+
+-- 显示左侧图标指示列   nv的gutter 有三种 number 显示数字 fold 显示折叠标志 sign 显示icon
+-- icon 占用的列数可以设置 auto 或者 yes:1 yes:2 yes:3 （固定列数） 或者 number 和行号共占一列
 vim.wo.signcolumn = "yes"
+-- vim.wo.signcolumn = "auto"
+-- vim.wo.signcolumn = "number"
 -- vim.wo.signcolumn = "yes:1"
+-- vim.wo.signcolumn = "auto:1"
+
 -- 右侧参考线，超过表示代码太长了，考虑换行
 -- vim.wo.colorcolumn = "80"
 vim.o.colorcolumn = "80"
@@ -91,9 +97,10 @@ vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- 不可见字符的显示，这里只把空格显示为一个点
 -- vim.opt.listchars = {eol = '↲', tab = '▸ ', trail = '·'}
 vim.opt.list = require("commConf").listchar
-vim.o.listchars = "tab:··,trail:▫"
-vim.opt.listchars:append("space:⋅")
+-- vim.o.listchars = "tab:··,trail:▫"
+-- vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append("trail:▫")
 -- vim.o.list = false
 -- vim.o.listchars = "space:·,tab:··"
 -- vim.o.listchars = "tab:··,trail:▫"

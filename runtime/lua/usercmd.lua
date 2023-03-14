@@ -104,3 +104,24 @@ api.nvim_create_user_command("DapContinuee", function()
 	rightSidebarAutoClose(ftAndCmandRight, "dapui_scopes")
 	vim.api.nvim_cmd(api.nvim_parse_cmd("DapContinue", {}), {})
 end, { desc = "DapContinue enhanced" })
+
+-- redirect command output
+vim.api.nvim_create_user_command("RecommandTo", function(args)
+	local cmd = ""
+	for _, v in ipairs(args.fargs) do
+		cmd = cmd .. v .. " "
+	end
+	cmd = cmd:gsub("^%s*(.-)%s*$", "%1")
+	local text = vim.api.nvim_exec(cmd, true)
+	local buf = vim.api.nvim_create_buf(true, true)
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(text, "\n", { trimempty = true, plain = true }))
+	vim.api.nvim_set_current_buf(buf)
+end, {
+	desc = "redirect command output",
+	nargs = "*",
+	complete = function(_, _, _)
+		return {
+			"messages",
+		}
+	end,
+})

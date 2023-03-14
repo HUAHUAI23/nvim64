@@ -3,12 +3,15 @@
 -- see ：h diagnostic.txt     398gg
 vim.diagnostic.config({
 	-- 🔬 🔮
-	virtual_text = { source = "always", prefix = "🔍️" },
+	-- virtual_text = { source = "always", prefix = "🔍️" },
+	virtual_text = { source = "always", prefix = "🪵" },
 	signs = true,
 	update_in_insert = false,
+	severity_sort = true,
 	float = {
 		border = "rounded",
 		source = "always", -- show diagnostices sources
+		severity_sort = true,
 	},
 })
 -- Change diagnostic symbols in the sign column (gutter)

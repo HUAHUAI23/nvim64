@@ -296,6 +296,7 @@ vim.api.nvim_create_user_command("JobAndTerm", function(args)
 			end
 		end,
 		alljob = function()
+			vim.pretty_print(#vim.api.nvim_list_chans())
 			vim.pretty_print(vim.api.nvim_list_chans())
 		end,
 		onejob = function(chan_id)

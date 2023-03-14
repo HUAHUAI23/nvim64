@@ -70,7 +70,7 @@ local function load_packer()
 			-- 顶部状态栏 bufferline
 			use({
 				"akinsho/bufferline.nvim",
-				tag = "v2.*",
+				tag = "v3.*",
 				requires = "kyazdani42/nvim-web-devicons",
 				event = "BufEnter",
 				config = function()

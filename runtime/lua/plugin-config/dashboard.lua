@@ -25,13 +25,13 @@ db.custom_footer = {
 }
 db.custom_center = {
 	{
-		icon = "🗃️  ",
+		icon = "🗓️  ",
 		desc = "Projects                            ",
 		action = "Telescope projects",
 	},
 	{
 		-- icon = "📎  ",
-		icon = "☕  ",
+		icon = "📝  ",
 		desc = "Work Space                          ",
 		-- action = "exe 'normal melloworld'",
 		action = "Telescope xray23 list",

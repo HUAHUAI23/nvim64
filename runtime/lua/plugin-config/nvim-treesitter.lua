@@ -103,12 +103,12 @@ treesitter.setup({
 		-- some compreesed file is very large,but only one line
 		max_file_lines = commConf.rainbowLargefileEdge, -- Do not enable for files with more than n lines, int
 		colors = {
-			"#95ca60",
+			"#98C379",
+			"#83a598",
 			"#ee6985",
-			"#D6A760",
-			"#7794f4",
-			"#b38bf5",
-			"#7cc7fe",
+			"#C678DD",
+			"#ebdbb2",
+			"#fe8019",
 		}, -- table of hex strings
 		-- termcolors = {} -- table of colour name strings
 	},

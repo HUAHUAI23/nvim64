@@ -13,14 +13,11 @@ local M = {
 	leader_key = " ",
 	-- normal模式下键盘映射
 	norl = {
-
 		goto_command_mode = "<F1>",
 		undo = "<space>u",
 		paste = "<space>p",
-
 		go_left35 = "H",
 		go_right35 = "L",
-
 		-- -- 粘贴模式可以防止从网页复制内容到vim而出现奇怪的缩进问题
 		-- 因为vim的缩减处理和一般文本编辑器不一样
 		goto_paste_mode = "sp",
@@ -98,6 +95,8 @@ local M = {
 		open_flow = "gl",
 		goto_next = "g<left>",
 		goto_prev = "g<right>",
+		open_fix_current = ";f",
+		open_fix_workspace = ";q",
 		format = "<leader>f",
 		-- TODO:
 		-- lsp_signature
@@ -189,7 +188,6 @@ local M = {
 		mkdnCreateLinkFromClipboard = "<Leader>mp",
 	},
 	yanky = {
-
 		yanky_after = "<leader>p",
 		yanky_before = "P",
 		-- PERF:

@@ -2,6 +2,9 @@
 
 ---
 
+标准 `./config/nvim` 版本：<https://github.com/HUAHUAI23/myneovimlua>
+非 `lua` 版本: <https://github.com/HUAHUAI23/myneovim>
+
 ## 安装须知
 
 ### 需要准备的东西

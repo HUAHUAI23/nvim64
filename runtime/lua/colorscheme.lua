@@ -87,6 +87,7 @@ local function set_editor_hl()
 
 	-- statusline
 	vim.api.nvim_set_hl(0, "StatusLine", { fg = "#98c379", bg = "#242a32", bold = true })
+
 	-- cursor number highlight
 	vim.api.nvim_set_hl(
 		0,
@@ -256,19 +257,23 @@ local function set_lsp_hl()
 	vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", { fg = "#ffa6ff" })
 
 	-- vim.api.nvim_set_hl(0, "DiagnosticError", { ctermfg = 1, fg = "Red", bold = true })
-	vim.api.nvim_set_hl(0, "DiagnosticError", { ctermfg = 1, fg = "#fb4934", italic = true })
+	-- vim.api.nvim_set_hl(0, "DiagnosticError", { ctermfg = 1, fg = "#fb4934", italic = true })
+	vim.api.nvim_set_hl(0, "DiagnosticError", { ctermfg = 1, fg = "#fb4934", bold = true })
 
 	-- vim.api.nvim_set_hl(0, "DiagnosticWarn", { ctermfg = 3, fg = "Orange", bold = true })
-	vim.api.nvim_set_hl(0, "DiagnosticWarn", { ctermfg = 3, fg = "#fe8019", italic = true })
+	-- vim.api.nvim_set_hl(0, "DiagnosticWarn", { ctermfg = 3, fg = "#fe8019", italic = true })
+	vim.api.nvim_set_hl(0, "DiagnosticWarn", { ctermfg = 3, fg = "#fe8019", bold = true })
 	-- vim.api.nvim_set_hl(0, "DiagnosticWarn", { ctermfg = 3, fg = "#83a598", italic = true })
 
 	-- vim.api.nvim_set_hl(0, "DiagnosticInfo", { ctermfg = 4, fg = "LightBlue", bold = true })
 	-- vim.api.nvim_set_hl(0, "DiagnosticInfo", { ctermfg = 4, fg = "#add8e6", bold = true })
-	vim.api.nvim_set_hl(0, "DiagnosticInfo", { ctermfg = 4, fg = "#8ec07c", italic = true })
+	-- vim.api.nvim_set_hl(0, "DiagnosticInfo", { ctermfg = 4, fg = "#8ec07c", italic = true })
+	vim.api.nvim_set_hl(0, "DiagnosticInfo", { ctermfg = 4, fg = "#8ec07c", bold = true })
 	-- vim.api.nvim_set_hl(0, "DiagnosticInfo", { ctermfg = 4, fg = "#BAE6FD", bold = true })
 
 	-- vim.api.nvim_set_hl(0, "DiagnosticHint", { ctermfg = 7, fg = "#d3d3d3", bold = true })
-	vim.api.nvim_set_hl(0, "DiagnosticHint", { ctermfg = 7, fg = "#bdae93", italic = true })
+	-- vim.api.nvim_set_hl(0, "DiagnosticHint", { ctermfg = 7, fg = "#bdae93", italic = true })
+	vim.api.nvim_set_hl(0, "DiagnosticHint", { ctermfg = 7, fg = "#bdae93", bold = true })
 
 	-- vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { standout = true, strikethrough = true, sp = "Red" })
 	vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { strikethrough = true, sp = "#fb4934" })
@@ -665,7 +670,9 @@ local caseList = {
 
 		-- TS treesitter
 		vim.api.nvim_set_hl(0, "TSAnnotation", { fg = "#83a598" })
+		-- html
 		vim.api.nvim_set_hl(0, "TSAttribute", { fg = "#83a598", italic = true })
+
 		vim.api.nvim_set_hl(0, "TSBoolean", { fg = "#C678DD", bold = true })
 		vim.api.nvim_set_hl(0, "TSCharacter", { fg = "#C678DD" })
 		vim.api.nvim_set_hl(0, "TSComment", { fg = "#928374" })
@@ -693,6 +700,16 @@ local caseList = {
 		vim.api.nvim_set_hl(0, "TSConstructor", { fg = "#83a598", bold = true })
 		vim.api.nvim_set_hl(0, "TSPunctBracket", { bold = true })
 		vim.api.nvim_set_hl(0, "TSFuncBuiltin", { fg = "#83a598", bold = true })
+
+		-- Markdown
+		vim.api.nvim_set_hl(0, "TSText", { fg = "#d5c4a1" })
+		vim.api.nvim_set_hl(0, "@text.uri", { fg = "#83a598", underline = true })
+		vim.api.nvim_set_hl(0, "@text.title", { fg = "#98c379", bold = true })
+		vim.api.nvim_set_hl(0, "@text.todo", { link = "Todo" })
+		vim.api.nvim_set_hl(0, "@text.reference", { fg = "#83a598" })
+		vim.api.nvim_set_hl(0, "@text.literal", { fg = "#928374", italic = true })
+		vim.api.nvim_set_hl(0, "@text.underline", { fg = "#83a598", underline = true })
+		vim.api.nvim_set_hl(0, "@text.strong", { fg = "#83a598", bold = true })
 
 		vim.cmd([[
             highlight! link @annotation TSAnnotation
@@ -1210,6 +1227,7 @@ end, {
 -- 	terminal_color_14 = "#8ec07c",
 -- 	terminal_color_15 = "#c0c0c0",
 -- }
+
 local terminal_colors = {
 	terminal_color_0 = "#2C323B",
 	terminal_color_1 = "#a80000",
@@ -1229,6 +1247,24 @@ local terminal_colors = {
 	terminal_color_14 = "#8ec07c",
 	terminal_color_15 = "#c0c0c0",
 }
+
+-- local terminal_colors = {
+-- 	terminal_color_0 = "#000000",
+-- 	terminal_color_1 = "#FF5555",
+-- 	terminal_color_2 = "#50FA7B",
+-- 	terminal_color_3 = "#F1FA8C",
+-- 	terminal_color_4 = "#BD93F9",
+-- 	terminal_color_5 = "#FF79C6",
+-- 	terminal_color_6 = "#8BE9FD",
+-- 	terminal_color_7 = "#BFBFBF",
+-- 	terminal_color_8 = "#4D4D4D",
+-- 	terminal_color_9 = "#FF6E67",
+-- 	terminal_color_10 = "#5AF78E",
+-- 	terminal_color_11 = "#F4F99D",
+-- 	terminal_color_12 = "#CAA9FA",
+-- 	terminal_color_13 = "#FF92D0",
+-- 	terminal_color_14 = "#9AEDFE",
+-- }
 
 for k, v in pairs(terminal_colors) do
 	vim.g[k] = v

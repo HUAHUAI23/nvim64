@@ -10,9 +10,9 @@ local Terminal = Term.Terminal
 toggleterm.setup({
 	size = function(term)
 		if term.direction == "horizontal" then
-			return vim.o.lines * 0.35
+			return math.floor(vim.o.lines * 0.35)
 		elseif term.direction == "vertical" then
-			return vim.o.columns * 0.3
+			return math.floor(vim.o.columns * 0.3)
 		end
 	end,
 	start_in_insert = true,
@@ -88,7 +88,7 @@ local td = Terminal:new({
 	direction = "vertical",
 	close_on_exit = true,
 	on_open = function(t)
-		vim.api.nvim_win_set_width(t.window, vim.o.columns * 0.8)
+		vim.api.nvim_win_set_width(t.window, math.floor(vim.o.columns * 0.8))
 	end,
 	on_stderr = function(t, job, data, name)
 		vim.pretty_print(name)

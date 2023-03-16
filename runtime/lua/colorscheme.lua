@@ -57,8 +57,6 @@ vim.g.deus_termcolors = 256
 local mode = "you"
 -- local mode = "camellia"
 
-local commConf = require("commConf")
-
 local function set_editor_hl()
 	-- editor
 	-- Normal         xxx ctermfg=223 ctermbg=235 guifg=#ebdbb2 guibg=#2c323b
